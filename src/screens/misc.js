@@ -1,6 +1,11 @@
 import { h } from "hyperapp";  // JSX will be turned into "h" by rollup
 import { Screen, O2Percentage } from "./base";
 
+
+/* ================================================================= *\
+ * Settings
+\* ================================================================= */
+
 function resetSettings(state) {
     console.log("Removing state from localStorage");
     window.localStorage.removeItem("state");
@@ -100,6 +105,11 @@ const Settings = ({state}) => (
         </table>
     </Screen>
 );
+
+
+/* ================================================================= *\
+ * Donate
+\* ================================================================= */
 
 const Donate = ({state}) => (
     <Screen title={"Donate"}>

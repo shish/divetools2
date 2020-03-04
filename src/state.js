@@ -19,6 +19,14 @@ const state = {
         want_ean: 21,
     },
 
+    vhf_channels: {
+        search: "",
+    },
+
+    phonetic: {
+        word: "",
+    },
+
     settings: {
         min_o2: 21,
         max_o2: 40,
