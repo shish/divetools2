@@ -1,0 +1,71 @@
+* {box-sizing: border-box;}
+BODY {
+  margin: 0;
+  padding: 0;
+  font-family: arial, sans-serif;
+}
+
+NAV {
+  H2 {
+    text-align: center;
+  }
+  SECTION {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    A {
+      display: inline-block;
+      width: 30vw;
+      height: 30vw;
+      text-align: center;
+      border-radius: 1vw;
+      border: 1px solid black;
+      margin: 1vw;
+    }
+  }
+}
+
+HEADER {
+  border-bottom: 1px solid black;
+  font-size: 2em;
+  display: flex;
+  text-align: center;
+  A {
+    flex: 1 auto;
+    border: 1px solid black;
+    flex-basis: 20%;
+  }
+  SPAN {
+    flex: 10 auto;
+    border: 1px solid black;
+    flex-basis: 60%;
+  }
+}
+
+TABLE.blend {
+  width: 100%;
+  TD:first-child {
+    text-align: right;
+    width: 15%;
+  }
+  TD:last-child {
+    width: 15%;
+  }
+  INPUT {
+    width: 100%;
+    margin-top: 8px;
+  }
+}
+
+A.donate {
+  display: block;
+  text-align: center;
+  width: 100%;
+  font-size: 3em;
+  margin-top: 1em;
+}
+
+BUTTON {
+  width: 100%;
+  font-size: 2em;
+}
