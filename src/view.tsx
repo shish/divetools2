@@ -4,8 +4,9 @@ import { MaxOperatingDepth, ContinuousNitroxBlend, PartialPressureNitroxBlend, B
 import { VhfChannels, PhoneticAlphabet } from "./screens/vhf";
 import { Settings, Donate } from "./screens/misc";
 import { Screen } from "./screens/base";
+import { State } from "./state";
 
-const TodoScreen = ({state}) => (
+const TodoScreen = ({state}: {state: State}) => (
     <Screen title={"To-Do"}>
         This screen is in progress
     </Screen>
@@ -15,7 +16,7 @@ const Link = ({screen}, children) => (
     <a onClick={state => ({...state, screen: screen})}><div>{children}</div></a>
 );
 
-function view(state) {
+export function view(state: State) {
     //return <body><PartialPressureNitroxBlend state={state} /></body>;
 
     let body = state.screen ? state.screen({state}) :
@@ -59,5 +60,3 @@ function view(state) {
     </Screen>;
     return <body>{body}</body>;
 }
-
-export { view };

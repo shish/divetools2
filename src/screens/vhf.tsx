@@ -1,6 +1,6 @@
-import { h } from "hyperapp";  // JSX will be turned into "h" by rollup
-import { Screen } from "./base";
-
+import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
+import {Screen} from "./base";
+import {State} from "../state";
 
 /* ================================================================= *\
  * VHF Channel List / Search
@@ -38,10 +38,10 @@ const ChannelSearch = ({filter}) => (
     </ul>
 );
 
-const VhfChannels = ({state}) => (
+export const VhfChannels = ({state}: {state: State}) => (
     <Screen title={"VHF Channels"}>
         <input
-            onInput={(state, event) => ({
+            onInput={(state: State, event: MyInputEvent) => ({
                 ...state,
                 vhf_channels: {
                     search: event.target.value,
@@ -96,7 +96,7 @@ const ALPHABET = {
     ' ': ' - ',
 };
 
-function word_to_phonetic(word) {
+function word_to_phonetic(word: string) {
     let words = "";
     for(let i=0; i<word.length; i++) {
         words += ALPHABET[word[i].toLowerCase()] + " ";
@@ -130,14 +130,11 @@ function alpha_table() {
     </table>;
 }
 
-const PhoneticAlphabet = ({state}) => (
+export const PhoneticAlphabet = ({state}: {state: State}) => (
     <Screen title={"Phonetic Alphabet"}>
         <input
-            onInput={(state, event) => ({
-                ...state,
-                phonetic: {
-                    word: event.target.value,
-                }
+            onInput={(state: State, event: MyInputEvent) => ({
+                ...state, phonetic: {word: event.target.value}
             })}
             value={state.phonetic.word}
             placeholder={"Enter text to translate"}
@@ -146,5 +143,3 @@ const PhoneticAlphabet = ({state}) => (
         {alpha_table()}
     </Screen>
 );
-
-export { VhfChannels, PhoneticAlphabet };

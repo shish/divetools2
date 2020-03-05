@@ -1,12 +1,13 @@
-import { h } from "hyperapp";  // JSX will be turned into "h" by rollup
-import { Screen, O2Percentage } from "./base";
+import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
+import {Screen, O2Percentage, O2} from "./base";
+import {State} from "../state";
 
 
 /* ================================================================= *\
  * Settings
 \* ================================================================= */
 
-function resetSettings(state) {
+function resetSettings(state: State) {
     console.log("Removing state from localStorage");
     window.localStorage.removeItem("state");
     window.location.reload();
@@ -17,11 +18,11 @@ const ResetButton = () => (
     <a onClick={resetSettings}>Reset</a>
 );
 
-const Settings = ({state}) => (
+export const Settings = ({state}: {state: State}) => (
     <Screen title={"Settings"} extraNav={<ResetButton />}>
         <table className={"blend"}>
             <tr>
-                <td>Min O<sub>2</sub></td>
+                <td>Min <O2/></td>
                 <td>
                     <input
                         type={"range"}
@@ -29,7 +30,7 @@ const Settings = ({state}) => (
                         max={1}
                         step={0.01}
                         value={state.settings.min_fo2}
-                        onInput={(state, event) => ({
+                        onInput={(state: State, event: MyInputEvent) => ({
                             ...state,
                             settings: {
                                 ...state.settings,
@@ -42,7 +43,7 @@ const Settings = ({state}) => (
                 <td><O2Percentage fo2={state.settings.min_fo2} /></td>
             </tr>
             <tr>
-                <td>Max O<sub>2</sub></td>
+                <td>Max <O2/></td>
                 <td>
                     <input
                         type={"range"}
@@ -50,7 +51,7 @@ const Settings = ({state}) => (
                         max={1}
                         step={0.01}
                         value={state.settings.max_fo2}
-                        onInput={(state, event) => ({
+                        onInput={(state: State, event: MyInputEvent) => ({
                             ...state,
                             settings: {
                                 ...state.settings,
@@ -71,7 +72,7 @@ const Settings = ({state}) => (
                         max={10}
                         step={1}
                         value={state.settings.tank_pressure_step}
-                        onInput={(state, event) => ({
+                        onInput={(state: State, event: MyInputEvent) => ({
                             ...state,
                             settings: {
                                 ...state.settings,
@@ -91,7 +92,7 @@ const Settings = ({state}) => (
                         max={300}
                         step={state.settings.tank_pressure_step}
                         value={state.settings.max_tank_pressure}
-                        onInput={(state, event) => ({
+                        onInput={(state: State, event: MyInputEvent) => ({
                             ...state,
                             settings: {
                                 ...state.settings,
@@ -103,10 +104,10 @@ const Settings = ({state}) => (
                 <td>{state.settings.max_tank_pressure}bar</td>
             </tr>
             <tr>
-                <td>Max pPO<sub>2</sub>:</td>
+                <td>Max pP<O2/>:</td>
                 <td><input
                     type={"range"} min={1.3} max={1.6} step={0.1} value={state.settings.max_ppo2}
-                    onInput={(state, event) => ({
+                    onInput={(state: State, event: MyInputEvent) => ({
                         ...state,
                         settings: {
                             ...state.settings,
@@ -125,10 +126,8 @@ const Settings = ({state}) => (
  * Donate
 \* ================================================================= */
 
-const Donate = ({state}) => (
+export const Donate = ({state}: {state: State}) => (
     <Screen title={"Donate"}>
         <a className={"donate"} href={"https://paypal.me/shish2k"}>PayPal</a>
     </Screen>
 );
-
-export { Settings, Donate };

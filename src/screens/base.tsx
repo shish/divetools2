@@ -1,13 +1,18 @@
-import { h } from "hyperapp";  // JSX will be turned into "h" by rollup
+import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
+import {State} from "../state";
 
-function saveStateAndGoBack(state) {
+function saveStateAndGoBack(state: State) {
     state = {...state, screen: null};
     console.log("Saving state: ", state);
     window.localStorage.setItem("state", JSON.stringify(state));
     return state;
 }
 
-const Screen = ({title, notice, extraNav, footer}, children) => (
+export const Screen = (
+    {title, notice, extraNav, footer}:
+        {title: string; notice?: boolean; extraNav?: boolean; footer?: boolean},
+    children
+) => (
     <div className={"screen"}>
         <header>
             <h1>{title}</h1>
@@ -25,12 +30,12 @@ const Screen = ({title, notice, extraNav, footer}, children) => (
     </div>
 );
 
-const O2Percentage = ({fo2}) => (
-    <span style={{color: fo2 > 1.0 ? "red" : (fo2 > 0.4 ? "orange" : "black")}}>{parseInt(fo2 * 100)}%</span>
+export const O2Percentage = ({fo2}: {fo2: number}) => (
+    <span style={{color: fo2 > 1.0 ? "red" : (fo2 > 0.4 ? "orange" : "black")}}>{Math.round(fo2 * 100)}%</span>
 );
 
-const O2CleanWarning = ({fo2}) => (
+export const O2CleanWarning = ({fo2}: {fo2: number}) => (
     fo2 > 0.4 ? <div style={{color: "orange"}}>(O<sub>2</sub> over 40% requires oxygen-serviced equipment)</div> : null
 );
 
-export { Screen, O2Percentage, O2CleanWarning };
+export const O2 = () => (<span>O<sub>2</sub></span>);

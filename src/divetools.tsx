@@ -1,8 +1,9 @@
-import { app } from "hyperapp";
-import { state } from "./state";
-import { view } from "./view";
+/// <reference path='./globals.d.ts'/>
+import {app} from "hyperapp";
+import {State, state} from "./state";
+import {view} from "./view";
 
-let loaded_state = state;
+let loaded_state: State = state;
 try {
     let saved_state = JSON.parse(window.localStorage.getItem("state") || "{}");
     loaded_state = {...loaded_state, ...saved_state};
