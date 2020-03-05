@@ -4,45 +4,76 @@ BODY {
   padding: 0;
   font-family: arial, sans-serif;
   INPUT {
-    width: 100%;
+    width: 90%;
     font-size: 1em;
+  }
+  BUTTON {
+    width: 100%;
+    font-size: 2em;
   }
 }
 
 NAV {
-  H2 {
-    text-align: center;
+  H3 {
+    // position: sticky;
+    // top: 2em;
   }
   SECTION {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     A {
-      display: inline-block;
-      width: 30vw;
-      height: 30vw;
+      display: inline-flex;
+      width: 45vw;
+      height: 15vw;
       text-align: center;
       border-radius: 1vw;
       border: 1px solid black;
       margin: 1vw;
+      flex-flow: column;
+      justify-content: center;
+      DIV {
+        flex: 0 0 auto;
+      }
     }
   }
 }
 
-HEADER {
-  font-size: 1.5em;
-  border-bottom: 1px solid black;
-  display: flex;
+DIV.screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
   text-align: center;
-  A {
-    flex: 1 auto;
-    border: 1px solid black;
-    flex-basis: 20%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  HEADER {
+    flex: 0 0 auto;
+    border-bottom: 1px solid black;
+    H1 {
+      width: 100%;
+      font-size: 1.5em;
+    }
   }
-  SPAN {
-    flex: 10 auto;
-    border: 1px solid black;
-    flex-basis: 60%;
+  ARTICLE {
+    flex: 0 1 auto;
+    overflow: scroll;
+    IMG {
+      max-height: 80vh;
+    }
+  }
+  FOOTER {
+    flex: 0 0 auto;
+    display: flex;
+    border-top: 1px solid black;
+    A {
+      font-size: 1.5em;
+      flex: 1 1 50%;
+      border: 1px solid black;
+    }
   }
 }
 
@@ -72,17 +103,12 @@ TABLE.phonetic {
       width: 1%;
       text-align: right;
     }
+    TD:last-child {
+      text-align: left;
+    }
   }
 }
-A.donate {
-  display: block;
-  text-align: center;
-  width: 100%;
-  font-size: 3em;
-  margin-top: 1em;
-}
 
-BUTTON {
-  width: 100%;
-  font-size: 2em;
+A.donate {
+  font-size: 3em;
 }

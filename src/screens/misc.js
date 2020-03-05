@@ -26,20 +26,20 @@ const Settings = ({state}) => (
                     <input
                         type={"range"}
                         min={0}
-                        max={100}
-                        step={1}
-                        value={state.settings.min_o2}
+                        max={1}
+                        step={0.01}
+                        value={state.settings.min_fo2}
                         onInput={(state, event) => ({
                             ...state,
                             settings: {
                                 ...state.settings,
-                                min_o2: event.target.value,
-                                max_o2: Math.max(state.settings.max_o2, event.target.value)
+                                min_fo2: parseFloat(event.target.value),
+                                max_fo2: Math.max(state.settings.max_fo2, parseFloat(event.target.value))
                             }
                         })}
                     />
                 </td>
-                <td><O2Percentage value={state.settings.min_o2} /></td>
+                <td><O2Percentage fo2={state.settings.min_fo2} /></td>
             </tr>
             <tr>
                 <td>Max O<sub>2</sub></td>
@@ -47,20 +47,20 @@ const Settings = ({state}) => (
                     <input
                         type={"range"}
                         min={0}
-                        max={100}
-                        step={1}
-                        value={state.settings.max_o2}
+                        max={1}
+                        step={0.01}
+                        value={state.settings.max_fo2}
                         onInput={(state, event) => ({
                             ...state,
                             settings: {
                                 ...state.settings,
-                                max_o2: event.target.value,
-                                min_o2: Math.min(state.settings.min_o2, event.target.value)
+                                max_fo2: parseFloat(event.target.value),
+                                min_fo2: Math.min(state.settings.min_fo2, parseFloat(event.target.value))
                             }
                         })}
                     />
                 </td>
-                <td><O2Percentage value={state.settings.max_o2} /></td>
+                <td><O2Percentage fo2={state.settings.max_fo2} /></td>
             </tr>
             <tr>
                 <td>Tank&nbsp;Pressure<br />Step Size</td>
@@ -75,7 +75,7 @@ const Settings = ({state}) => (
                             ...state,
                             settings: {
                                 ...state.settings,
-                                tank_pressure_step: event.target.value,
+                                tank_pressure_step: parseInt(event.target.value),
                             }
                         })}
                     />
@@ -95,12 +95,26 @@ const Settings = ({state}) => (
                             ...state,
                             settings: {
                                 ...state.settings,
-                                max_tank_pressure: event.target.value,
+                                max_tank_pressure: parseInt(event.target.value),
                             }
                         })}
                     />
                 </td>
                 <td>{state.settings.max_tank_pressure}bar</td>
+            </tr>
+            <tr>
+                <td>Max pPO<sub>2</sub>:</td>
+                <td><input
+                    type={"range"} min={1.3} max={1.6} step={0.1} value={state.settings.max_ppo2}
+                    onInput={(state, event) => ({
+                        ...state,
+                        settings: {
+                            ...state.settings,
+                            max_ppo2: parseFloat(event.target.value),
+                        }
+                    })}
+                /></td>
+                <td>{state.settings.max_ppo2}bar</td>
             </tr>
         </table>
     </Screen>

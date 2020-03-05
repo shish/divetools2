@@ -1,22 +1,27 @@
-// ====================================================================
-// State and state management functions
-// ====================================================================
-
 const state = {
     // global app bits
     screen: null,
 
-    nitrox_calc: {
-        ean: 32,
+    // Max Operating Depth
+    mod: {
+        fo2: 0.32,
+    },
+    best_mix: {
         mod: 32,
-        ppo2: 1.4,
     },
 
     nitrox_blend: {
-        have_bar: 0,
-        have_ean: 21,
-        want_bar: 230,
-        want_ean: 21,
+        have_bar: 20,
+        have_fo2: 0.33,
+        want_bar: 100,
+        want_fo2: 0.40,
+        topup_fo2: 0.33,
+    },
+
+    ead: {
+        depth: 33,
+        fo2: 0.32,
+        // ead == 27
     },
 
     vhf_channels: {
@@ -28,8 +33,9 @@ const state = {
     },
 
     settings: {
-        min_o2: 21,
-        max_o2: 40,
+        min_fo2: 0.21,
+        max_fo2: 0.40,
+        max_ppo2: 1.4,
         max_tank_pressure: 230,
         tank_pressure_step: 5,
     }
