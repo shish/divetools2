@@ -2,11 +2,11 @@ import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
 import {Screen, O2Percentage, O2CleanWarning, O2} from "./base";
 import {State} from "../state";
 
-function depth_to_bar(m: number) {
-    return (m / 10) + 1;
+function depth_to_bar(m: Meters): Bar {
+    return ((m / 10) + 1) as Bar;
 }
-function bar_to_depth(b: number) {
-    return (b - 1) * 10;
+function bar_to_depth(b: Bar): Meters {
+    return ((b - 1) * 10) as Meters;
 }
 
 /* ================================================================= *\
@@ -27,7 +27,7 @@ export const MaxOperatingDepth = ({state}: {state: State}) => (
             step={0.01}
             onInput={(state: State, event: MyInputEvent) => ({
                 ...state, mod: {fo2: parseFloat(event.target.value)}
-            })}
+            } as State)}
         />
         <h2>Max Operating Depth: {Math.floor(((state.settings.max_ppo2 / state.mod.fo2) - 1) * 10)}m</h2>
         <p>Max Operating Pressure: {Math.floor(state.settings.max_ppo2 / state.mod.fo2 * 10)/10}bar</p>
@@ -36,7 +36,7 @@ export const MaxOperatingDepth = ({state}: {state: State}) => (
 );
 
 export const BestMix = ({state}: {state: State}) => (
-    <Screen title={"Best Mix for Depth"} notice={<O2CleanWarning fo2={state.settings.max_ppo2 / depth_to_bar(state.best_mix.mod)} />}>
+    <Screen title={"Best Mix for Depth"} notice={<O2CleanWarning fo2={state.settings.max_ppo2 / depth_to_bar(state.best_mix.mod) as Fraction} />}>
         <h2>Max Operating Depth: {state.best_mix.mod}m</h2>
         <input
             type={"range"}
@@ -45,10 +45,10 @@ export const BestMix = ({state}: {state: State}) => (
             value={state.best_mix.mod}
             onInput={(state: State, event: MyInputEvent) => ({
                 ...state, best_mix: {mod: parseInt(event.target.value)}
-            })}
+            } as State)}
         />
         <h2>
-            Max EAN <O2/> Level: <O2Percentage fo2={state.settings.max_ppo2 / depth_to_bar(state.best_mix.mod)} />
+            Max EAN <O2/> Level: <O2Percentage fo2={state.settings.max_ppo2 / depth_to_bar(state.best_mix.mod) as Fraction} />
         </h2>
         <p>Max Operating Pressure: {Math.floor(depth_to_bar(state.best_mix.mod)*10)/10}bar</p>
         <p>(Using max pP<O2/> = {state.settings.max_ppo2}bar)</p>
@@ -64,12 +64,12 @@ export const BestMix = ({state}: {state: State}) => (
  * To go from (have_bar * have_ean) to (want_bar * want_ean), set the
  * nitrox compressor to output this percentage, and top up to want_bar.
  */
-function nitrox_top_up(have_bar, have_fo2, want_bar, want_fo2) {
+function nitrox_top_up(have_bar: Bar, have_fo2: Fraction, want_bar: Bar, want_fo2: Fraction): Fraction {
     const need_bar = want_bar - have_bar;
     const have_o2 = have_bar * have_fo2;
     const want_o2 = want_bar * want_fo2;
     const need_o2 = want_o2 - have_o2;
-    return need_o2 / need_bar;
+    return (need_o2 / need_bar) as Fraction;
 }
 
 const NitroxHave = ({state}: {state: State}) => (
@@ -91,7 +91,7 @@ const NitroxHave = ({state}: {state: State}) => (
                     have_bar: parseInt(event.target.value),
                     want_bar: Math.max(state.nitrox_blend.want_bar, parseInt(event.target.value)),
                 }
-            })}
+            } as State)}
         />
         <input
             type={"range"}
@@ -105,7 +105,7 @@ const NitroxHave = ({state}: {state: State}) => (
                     ...state.nitrox_blend,
                     have_fo2: parseFloat(event.target.value),
                 }
-            })}
+            } as State)}
         />
     </div>
 );
@@ -129,7 +129,7 @@ const NitroxWant = ({state}: {state: State}) => (
                     want_bar: parseInt(event.target.value),
                     have_bar: Math.min(state.nitrox_blend.have_bar, parseInt(event.target.value)),
                 }
-            })}
+            } as State)}
         />
         <input
             type={"range"}
@@ -143,7 +143,7 @@ const NitroxWant = ({state}: {state: State}) => (
                     ...state.nitrox_blend,
                     want_fo2: parseFloat(event.target.value),
                 }
-            })}
+            } as State)}
         />
     </div>
 );
@@ -163,13 +163,13 @@ const NitroxTopUp = ({state}: {state: State}) => (
                     ...state.nitrox_blend,
                     topup_fo2: parseFloat(event.target.value),
                 }
-            })}
+            } as State)}
         />
     </div>
 );
 
 export const ContinuousNitroxBlend = ({state}: {state: State}) => (
-    <Screen title={"Continuous Blend"} notice={<O2CleanWarning fo2={Math.max(state.nitrox_blend.have_fo2, state.nitrox_blend.want_fo2)} />}>
+    <Screen title={"Continuous Blend"} notice={<O2CleanWarning fo2={Math.max(state.nitrox_blend.have_fo2, state.nitrox_blend.want_fo2) as Fraction} />}>
         <NitroxHave state={state} />
         <NitroxWant state={state} />
         <h2>
@@ -194,7 +194,7 @@ export const ContinuousNitroxBlend = ({state}: {state: State}) => (
  * ---------------------  * fill_pressure = fill o2 pressure
  *        topup_n2%
  */
-function o2_top_up(s) {
+function o2_top_up(s): Bar {
     // based on how much n2 we have now, how much we plan to have
     // at the end, and how much we're filling with - figure out
     // how much filling we need to do.
@@ -209,7 +209,7 @@ function o2_top_up(s) {
     const have_ppo2 = (s.have_bar * s.have_fo2);
     const want_ppo2 = (s.want_bar * s.want_fo2);
     const ppo2_from_fill = need_fill_bar * s.topup_fo2;
-    return Math.floor(want_ppo2 - have_ppo2 - ppo2_from_fill);
+    return Math.floor(want_ppo2 - have_ppo2 - ppo2_from_fill) as Bar;
 }
 
 export const PartialPressureNitroxBlend = ({state}: {state: State}) => (
@@ -220,7 +220,7 @@ export const PartialPressureNitroxBlend = ({state}: {state: State}) => (
         <h2>
             { (state.nitrox_blend.want_bar - state.nitrox_blend.have_bar) >= o2_top_up(state.nitrox_blend) && o2_top_up(state.nitrox_blend) >= 0 ?
                 <span>
-                    Add {o2_top_up(state.nitrox_blend)}bar of <O2Percentage fo2={1.0} /> <O2/>
+                    Add {o2_top_up(state.nitrox_blend)}bar of <O2Percentage fo2={1.0 as Fraction} /> <O2/>
                     <br/>Add {state.nitrox_blend.want_bar - state.nitrox_blend.have_bar - o2_top_up(state.nitrox_blend)}bar
                     of <O2Percentage fo2={state.nitrox_blend.topup_fo2} /> <O2/>
                 </span> :
@@ -236,11 +236,18 @@ export const PartialPressureNitroxBlend = ({state}: {state: State}) => (
  * Equivalent Air Depth
 \* ================================================================= */
 
-function ead(depth, fo2) {
-    const pressure = depth_to_bar(depth);
-    const fn2 = (1.0 - fo2);
-    const ppn2 = fn2 * pressure;
-    const equivalent_air_pressure = ppn2 / 0.79;
+function fo2_to_fn2(o2: Fraction): Fraction {
+    return (1.0 - o2) as Fraction;
+}
+function partial_pressure(p: Bar, f: Fraction): Bar {
+    return (f * p) as Bar;
+}
+
+function ead(depth: Meters, fo2: Fraction): Meters {
+    const pressure: Bar = depth_to_bar(depth);
+    const fn2: Fraction = fo2_to_fn2(fo2);
+    const ppn2: Bar = partial_pressure(pressure, fn2);
+    const equivalent_air_pressure: Bar = (ppn2 / 0.79) as Bar;
     return bar_to_depth(equivalent_air_pressure);
 }
 
@@ -265,7 +272,7 @@ export const EquivalentAirDepth = ({state}: {state: State}) => (
             value={state.ead.fo2}
             onInput={(state: State, event: MyInputEvent) => ({
                 ...state, ead: {...state.ead, fo2: parseFloat(event.target.value)}
-            })}
+            } as State)}
         />
         <h2>Equivalent Air Depth: {Math.round(ead(state.ead.depth, state.ead.fo2))}m</h2>
     </Screen>

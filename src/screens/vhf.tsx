@@ -6,9 +6,13 @@ import {State} from "../state";
  * VHF Channel List / Search
 \* ================================================================= */
 
+function intersect(a, b) {
+    return a.filter(value => -1 !== b.indexOf(value))
+}
+
 // https://en.wikipedia.org/wiki/Marine_VHF_radio
 const DUPLEX = [83];  // TODO: complete list?
-const VHF_RANGE = 35;  // "30-40 miles"
+// const VHF_RANGE = 35;  // "30-40 miles"
 
 const CHANNELS = [
     {name: "Dublin Port", channels: [12]},
@@ -27,12 +31,13 @@ const ChannelSearch = ({filter}) => (
     <ul>
         {
             CHANNELS
-                .filter(
-                    filter
-                )
+                .filter(filter)
                 .map(
                     (x) => (
-                        <li>{x.channels.join(", ")} - {x.name}</li>)
+                        <li>
+                            {x.channels.join(", ")} - {x.name}
+                            {intersect(x.channels, DUPLEX).length ? " (Duplex)" : null}
+                        </li>)
                 )
         }
     </ul>
@@ -46,7 +51,7 @@ export const VhfChannels = ({state}: {state: State}) => (
                 vhf_channels: {
                     search: event.target.value,
                 }
-            })}
+            } as State)}
             placeholder={"Search"}
         />
         {state.vhf_channels.search ?
@@ -96,7 +101,7 @@ const ALPHABET = {
     ' ': ' - ',
 };
 
-function word_to_phonetic(word: string) {
+function word_to_phonetic(word: string): string {
     let words = "";
     for(let i=0; i<word.length; i++) {
         words += ALPHABET[word[i].toLowerCase()] + " ";
@@ -135,7 +140,7 @@ export const PhoneticAlphabet = ({state}: {state: State}) => (
         <input
             onInput={(state: State, event: MyInputEvent) => ({
                 ...state, phonetic: {word: event.target.value}
-            })}
+            } as State)}
             value={state.phonetic.word}
             placeholder={"Enter text to translate"}
         />

@@ -6,7 +6,7 @@ import { Settings, Donate } from "./screens/misc";
 import { Screen } from "./screens/base";
 import { State } from "./state";
 
-const TodoScreen = ({state}: {state: State}) => (
+const TodoScreen = () => (
     <Screen title={"To-Do"}>
         This screen is in progress
     </Screen>

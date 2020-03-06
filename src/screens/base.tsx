@@ -30,11 +30,11 @@ export const Screen = (
     </div>
 );
 
-export const O2Percentage = ({fo2}: {fo2: number}) => (
+export const O2Percentage = ({fo2}: {fo2: Fraction}) => (
     <span style={{color: fo2 > 1.0 ? "red" : (fo2 > 0.4 ? "orange" : "black")}}>{Math.round(fo2 * 100)}%</span>
 );
 
-export const O2CleanWarning = ({fo2}: {fo2: number}) => (
+export const O2CleanWarning = ({fo2}: {fo2: Fraction}) => (
     fo2 > 0.4 ? <div style={{color: "orange"}}>(O<sub>2</sub> over 40% requires oxygen-serviced equipment)</div> : null
 );
 

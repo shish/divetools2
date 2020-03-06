@@ -2,16 +2,15 @@ import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
 import {Screen} from "./base";
 import dive_table from '../assets/dive-table.jpg';
 import repetitive_dive_table from '../assets/repetitive-dive-table.jpg';
-import {State} from "../state";
 
-export const DiveTable = ({state}: {state: State}) => (
+export const DiveTable = () => (
     <Screen title={"Dive Table"}>
-        <img src={dive_table} />
+        <img alt={"Dive Table"} src={dive_table} />
     </Screen>
 );
 
-export const RepetitiveDiveTable = ({state}: {state: State}) => (
+export const RepetitiveDiveTable = () => (
     <Screen title={"Repetitive Dive Table"}>
-        <img src={repetitive_dive_table} />
+        <img alt={"Repetitive Dive Table"} src={repetitive_dive_table} />
     </Screen>
 );

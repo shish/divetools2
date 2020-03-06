@@ -7,7 +7,7 @@ import {State} from "../state";
  * Settings
 \* ================================================================= */
 
-function resetSettings(state: State) {
+function resetSettings() {
     console.log("Removing state from localStorage");
     window.localStorage.removeItem("state");
     window.location.reload();
@@ -37,7 +37,7 @@ export const Settings = ({state}: {state: State}) => (
                                 min_fo2: parseFloat(event.target.value),
                                 max_fo2: Math.max(state.settings.max_fo2, parseFloat(event.target.value))
                             }
-                        })}
+                        } as State)}
                     />
                 </td>
                 <td><O2Percentage fo2={state.settings.min_fo2} /></td>
@@ -58,7 +58,7 @@ export const Settings = ({state}: {state: State}) => (
                                 max_fo2: parseFloat(event.target.value),
                                 min_fo2: Math.min(state.settings.min_fo2, parseFloat(event.target.value))
                             }
-                        })}
+                        } as State)}
                     />
                 </td>
                 <td><O2Percentage fo2={state.settings.max_fo2} /></td>
@@ -78,7 +78,7 @@ export const Settings = ({state}: {state: State}) => (
                                 ...state.settings,
                                 tank_pressure_step: parseInt(event.target.value),
                             }
-                        })}
+                        } as State)}
                     />
                 </td>
                 <td>{state.settings.tank_pressure_step}bar</td>
@@ -98,7 +98,7 @@ export const Settings = ({state}: {state: State}) => (
                                 ...state.settings,
                                 max_tank_pressure: parseInt(event.target.value),
                             }
-                        })}
+                        } as State)}
                     />
                 </td>
                 <td>{state.settings.max_tank_pressure}bar</td>
@@ -113,7 +113,7 @@ export const Settings = ({state}: {state: State}) => (
                             ...state.settings,
                             max_ppo2: parseFloat(event.target.value),
                         }
-                    })}
+                    } as State)}
                 /></td>
                 <td>{state.settings.max_ppo2}bar</td>
             </tr>
@@ -126,7 +126,7 @@ export const Settings = ({state}: {state: State}) => (
  * Donate
 \* ================================================================= */
 
-export const Donate = ({state}: {state: State}) => (
+export const Donate = () => (
     <Screen title={"Donate"}>
         <a className={"donate"} href={"https://paypal.me/shish2k"}>PayPal</a>
     </Screen>
