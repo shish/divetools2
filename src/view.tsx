@@ -2,7 +2,7 @@ import { h } from "hyperapp";  // JSX will be turned into "h" by rollup
 import { DiveTable, RepetitiveDiveTable } from "./screens/tables";
 import { MaxOperatingDepth, ContinuousNitroxBlend, PartialPressureNitroxBlend, BestMix, EquivalentAirDepth } from "./screens/nitrox";
 import { VhfChannels, PhoneticAlphabet } from "./screens/vhf";
-import { Settings, Donate } from "./screens/misc";
+import { Settings, About } from "./screens/misc";
 import { Screen } from "./screens/base";
 import { State } from "./state";
 
@@ -20,9 +20,9 @@ export function view(state: State) {
     //return <body><PartialPressureNitroxBlend state={state} /></body>;
 
     let body = state.screen ? state.screen({state}) :
-    <Screen title={"Dive Tools"} footer={[
+    <Screen title={"Dive Tools"} blank={false} footer={[
         <Link screen={Settings}>Settings</Link>,
-        <Link screen={Donate}>Donate</Link>
+        <Link screen={About}>About</Link>
     ]}>
         <nav>
             <h3>Tables</h3>
@@ -41,14 +41,17 @@ export function view(state: State) {
             <h3>Radio</h3>
             <section>
                 <Link screen={VhfChannels}>VHF Channels</Link>
-                <Link screen={PhoneticAlphabet}>Phonetic Alphabet</Link>
+                <Link screen={PhoneticAlphabet}>Phonetic<br/>Alphabet</Link>
+            </section>
+            <h3>Checklists</h3>
+            <section>
+                <Link screen={TodoScreen}>Shore Dive</Link>
+                <Link screen={TodoScreen}>Boat Dive</Link>
+                <Link screen={TodoScreen}>Cox'n</Link>
+                <Link screen={TodoScreen}>Other</Link>
             </section>
             <h3>Other</h3>
             <section>
-                <Link screen={TodoScreen}>Other</Link>
-                <Link screen={TodoScreen}>Other</Link>
-                <Link screen={TodoScreen}>Other</Link>
-                <Link screen={TodoScreen}>Other</Link>
                 <Link screen={TodoScreen}>Other</Link>
                 <Link screen={TodoScreen}>Other</Link>
                 <Link screen={TodoScreen}>Other</Link>

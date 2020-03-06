@@ -1,5 +1,5 @@
 import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
-import {Screen, O2Percentage, O2} from "./base";
+import {Screen, O2Percentage, O2, BackButton} from "./base";
 import {State} from "../state";
 
 
@@ -19,8 +19,8 @@ const ResetButton = () => (
 );
 
 export const Settings = ({state}: {state: State}) => (
-    <Screen title={"Settings"} extraNav={<ResetButton />}>
-        <table className={"blend"}>
+    <Screen title={"Settings"} footer={[<BackButton/>, <ResetButton />]}>
+        <table className={"settings"}>
             <tr>
                 <td>Min <O2/></td>
                 <td>
@@ -126,8 +126,16 @@ export const Settings = ({state}: {state: State}) => (
  * Donate
 \* ================================================================= */
 
-export const Donate = () => (
-    <Screen title={"Donate"}>
-        <a className={"donate"} href={"https://paypal.me/shish2k"}>PayPal</a>
+export const About = () => (
+    <Screen title={"About"}>
+        <h2>
+            Created by Shish
+        </h2>
+        <p>
+            Ocean background
+            by <a href={"https://commons.wikimedia.org/w/index.php?curid=20284104"}>Vanesa camaño</a> -
+            CC BY-SA 3.0
+        </p>
+        <p><a className={"donate"} href={"https://paypal.me/shish2k"}>PayPal</a></p>
     </Screen>
 );

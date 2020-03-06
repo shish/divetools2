@@ -3,14 +3,101 @@ BODY {
   margin: 0;
   padding: 0;
   font-family: arial, sans-serif;
-  INPUT {
-    width: 90%;
-    font-size: 1em;
+}
+
+MAIN {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  // By Vanesa camaño - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=20284104
+  background-image: url("assets/bg.jpg");
+  background-size: cover;
+
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  HEADER {
+    flex: 0 0 auto;
+    border-bottom: 1px solid white;
+    background-image: linear-gradient(180deg, #8DF 0%, #CEF 100%);
+    H1 {
+      width: 100%;
+      font-size: 1.5em;
+    }
   }
-  BUTTON {
-    width: 100%;
-    font-size: 2em;
+  ARTICLE {
+    flex: 0 1 auto;
+    overflow: scroll;
+    IMG {
+      max-height: 80vh;
+    }
   }
+  ARTICLE.blank {
+    background: rgba(255, 255, 255, 75%);
+    border-radius: 10px;
+    margin: 1em;
+    padding: 1em;
+  }
+  FOOTER {
+    flex: 0 0 auto;
+    display: flex;
+    border-top: 1px solid black;
+    background-image: linear-gradient(180deg, #468 0%, #678 100%);
+    A {
+      font-size: 1.5em;
+      flex: 1 1 50%;
+      border: 1px solid black;
+      margin: 1vw;
+      padding: 1vw;
+      border-radius: 1vw;
+    }
+  }
+}
+
+
+.ok {color: black;}
+.warning {color: orange;}
+.error {color: red;}
+
+INPUT {
+  width: 90%;
+  font-size: 1em;
+}
+BUTTON {
+  width: 100%;
+  font-size: 2em;
+}
+
+A.button {
+  border-radius: 3vw;
+  border: 4px solid #222;
+  font-weight: bold;
+  text-shadow: #DDD 0px 2px 1px;
+  box-shadow:
+          inset #DDD 2px 2px 0px,
+          inset #AAA -2px -2px 0px,
+          #DDD 2px 2px 1px,
+          #AAA -2px -2px 1px,
+          #AAA 2px -2px 1px,
+          #AAA -2px 2px 1px;
+  background-image: linear-gradient(180deg, hsl(0,0%,78%)  0%,
+          hsl(0,0%,90%) 47%,
+          hsl(0,0%,78%) 53%,
+          hsl(0,0%,70%)100%);
+}
+A.button:hover { // :active
+  //color: hsl(210, 100%, 40%);
+  //text-shadow: hsla(210,100%,20%) 0 0 4px;
+  box-shadow:
+          inset #AAA 2px 2px 0px,
+          inset #DDD -2px -2px 0px,
+          #DDD 2px 2px 1px,
+          #AAA -2px -2px 1px,
+          #AAA 2px -2px 1px,
+          #AAA -2px 2px 1px;
 }
 
 NAV {
@@ -26,9 +113,6 @@ NAV {
       display: inline-flex;
       width: 45vw;
       height: 15vw;
-      text-align: center;
-      border-radius: 1vw;
-      border: 1px solid black;
       margin: 1vw;
       flex-flow: column;
       justify-content: center;
@@ -39,45 +123,7 @@ NAV {
   }
 }
 
-DIV.screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  text-align: center;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  HEADER {
-    flex: 0 0 auto;
-    border-bottom: 1px solid black;
-    H1 {
-      width: 100%;
-      font-size: 1.5em;
-    }
-  }
-  ARTICLE {
-    flex: 0 1 auto;
-    overflow: scroll;
-    IMG {
-      max-height: 80vh;
-    }
-  }
-  FOOTER {
-    flex: 0 0 auto;
-    display: flex;
-    border-top: 1px solid black;
-    A {
-      font-size: 1.5em;
-      flex: 1 1 50%;
-      border: 1px solid black;
-    }
-  }
-}
-
-TABLE.blend {
+TABLE.settings {
   width: 100%;
   TD:first-child {
     text-align: right;
@@ -109,6 +155,55 @@ TABLE.phonetic {
   }
 }
 
+TABLE.vhf {
+  margin: auto;
+  TH {
+    text-align: center;
+  }
+  TD:first-child,
+  TD:nth-child(2) {
+    text-align: right;
+  }
+  TD:last-child {
+    text-align: left;
+  }
+}
+
 A.donate {
   font-size: 3em;
 }
+
+/*
+$DARK_BG: #333;
+$DARK_FG: #DDD;
+
+@media (prefers-color-scheme: dark) {
+  BODY {
+    background: $DARK_BG;
+    color: $DARK_FG;
+  }
+  .ok {color: $DARK_FG;}
+  A {
+    background: $DARK_BG;
+  }
+  MAIN {
+    background: #111;
+    HEADER {
+      background: $DARK_BG;
+      border-color: $DARK_FG;
+    }
+    ARTICLE {
+      NAV SECTION A {
+        border-color: $DARK_FG;
+      }
+    }
+    FOOTER {
+      background: $DARK_BG;
+      border-top-color: $DARK_FG;
+      A {
+        border-color: $DARK_FG;
+      }
+    }
+  }
+}
+*/

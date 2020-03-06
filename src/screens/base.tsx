@@ -8,16 +8,20 @@ function saveStateAndGoBack(state: State) {
     return state;
 }
 
+export const BackButton = () => (
+    <a className={"button"} onclick={saveStateAndGoBack}>Back</a>
+);
+
 export const Screen = (
-    {title, notice, footer = [<a className={"button"} onclick={saveStateAndGoBack}>Back</a>]}:
-        {title: string; notice?: boolean; footer: Array<any>},
+    {title, notice, blank=true, footer = [<BackButton />]}:
+        {title: string; notice?: any; blank?: boolean; footer?: Array<any>},
     children
 ) => (
     <main>
         <header>
             <h1>{title}</h1>
         </header>
-        <article>
+        <article className={blank ? "blank" : null}>
             <div style={{position: "absolute", top: 0, left: 0, right: 0}}>{notice}</div>
             {children}
         </article>
