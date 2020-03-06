@@ -28,21 +28,21 @@ const CHANNELS = [
 ];
 
 const ChannelSearch = ({filter}) => (
-    <ul>
-        {
-            CHANNELS
-                .filter(filter)
-                .map(
-                    (x) => (
-                        <li>
-                            {x.channels.join(", ")} - {x.name}
-                            {intersect(x.channels, DUPLEX).length ? " (Duplex)" : null}
-                        </li>)
-                )
-        }
-    </ul>
+    CHANNELS
+        .filter(filter)
+        .map(
+            (x) => (
+                <tr>
+                    <td>{x.channels.join(", ")}</td>
+                    <td>-</td>
+                    <td>
+                        {x.name} {intersect(x.channels, DUPLEX).length ? " (Duplex)" : null}
+                    </td>
+                </tr>)
+        )
 );
 
+// TODO: local channels
 export const VhfChannels = ({state}: {state: State}) => (
     <Screen title={"VHF Channels"}>
         <input
@@ -54,15 +54,17 @@ export const VhfChannels = ({state}: {state: State}) => (
             } as State)}
             placeholder={"Search"}
         />
-        {state.vhf_channels.search ?
+        <table class={"vhf"}>
+            {state.vhf_channels.search ?
             <ChannelSearch filter={(x) =>
                 (x.name.toLowerCase().indexOf(state.vhf_channels.search.toLowerCase()) !== -1)}
                 /> :
-            <ul>
-                <li>Standard Channels:</li>
+            <tbody>
+                <tr><th colspan={3}>Standard Channels:</th></tr>
                 <ChannelSearch filter={(x) => (x.standard)} />
-            </ul>
+            </tbody>
         }
+        </table>
     </Screen>
 );
 

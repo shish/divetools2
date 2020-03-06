@@ -9,11 +9,11 @@ function saveStateAndGoBack(state: State) {
 }
 
 export const Screen = (
-    {title, notice, extraNav, footer}:
-        {title: string; notice?: boolean; extraNav?: boolean; footer?: boolean},
+    {title, notice, footer = [<a className={"button"} onclick={saveStateAndGoBack}>Back</a>]}:
+        {title: string; notice?: boolean; footer: Array<any>},
     children
 ) => (
-    <div className={"screen"}>
+    <main>
         <header>
             <h1>{title}</h1>
         </header>
@@ -21,17 +21,12 @@ export const Screen = (
             <div style={{position: "absolute", top: 0, left: 0, right: 0}}>{notice}</div>
             {children}
         </article>
-        {footer === false ? null :
-            <footer>
-                <a className={"back"} onClick={saveStateAndGoBack}>Back</a>
-                {extraNav ? extraNav : <a />}
-            </footer>
-        }
-    </div>
+        {footer ? <footer>{footer}</footer> : null}
+    </main>
 );
 
 export const O2Percentage = ({fo2}: {fo2: Fraction}) => (
-    <span style={{color: fo2 > 1.0 ? "red" : (fo2 > 0.4 ? "orange" : "black")}}>{Math.round(fo2 * 100)}%</span>
+    <span className={fo2 > 1.0 ? "error" : (fo2 > 0.4 ? "warning" : "ok")}>{Math.round(fo2 * 100)}%</span>
 );
 
 export const O2CleanWarning = ({fo2}: {fo2: Fraction}) => (

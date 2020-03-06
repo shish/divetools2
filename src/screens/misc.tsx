@@ -15,7 +15,7 @@ function resetSettings() {
 }
 
 const ResetButton = () => (
-    <a onClick={resetSettings}>Reset</a>
+    <a class={"button"} onClick={resetSettings}>Reset</a>
 );
 
 export const Settings = ({state}: {state: State}) => (

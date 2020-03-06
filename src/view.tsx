@@ -13,14 +13,17 @@ const TodoScreen = () => (
 );
 
 const Link = ({screen}, children) => (
-    <a onClick={state => ({...state, screen: screen})}><div>{children}</div></a>
+    <a class={"button"} onClick={state => ({...state, screen: screen})}><div>{children}</div></a>
 );
 
 export function view(state: State) {
     //return <body><PartialPressureNitroxBlend state={state} /></body>;
 
     let body = state.screen ? state.screen({state}) :
-    <Screen title={"Dive Tools"} footer={false}>
+    <Screen title={"Dive Tools"} footer={[
+        <Link screen={Settings}>Settings</Link>,
+        <Link screen={Donate}>Donate</Link>
+    ]}>
         <nav>
             <h3>Tables</h3>
             <section>
@@ -39,11 +42,6 @@ export function view(state: State) {
             <section>
                 <Link screen={VhfChannels}>VHF Channels</Link>
                 <Link screen={PhoneticAlphabet}>Phonetic Alphabet</Link>
-            </section>
-            <h3>Misc</h3>
-            <section>
-                <Link screen={Settings}>Settings</Link>
-                <Link screen={Donate}>Donate</Link>
             </section>
             <h3>Other</h3>
             <section>
