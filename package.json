@@ -21,7 +21,7 @@
         "name": "DiveTools",
         "shortName": "DiveTools",
         "startURL": ".",
-        "x_theme": "#68c4d6",
+        "theme": "#B9FFFF",
         "display": "standalone",
         "orientation": "portrait",
         "generateIconOptions": {
