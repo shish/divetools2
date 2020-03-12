@@ -12,7 +12,7 @@ MAIN {
   right: 0;
   bottom: 0;
   // By Vanesa camaño - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=20284104
-  background-image: url("assets/bg.jpg");
+  background-image: url("bg.jpg");
   background-size: cover;
 
   text-align: center;
@@ -88,7 +88,7 @@ A.button {
           hsl(0,0%,78%) 53%,
           hsl(0,0%,70%)100%);
 }
-A.button:hover { // :active
+A.button:active { // :hover
   //color: hsl(210, 100%, 40%);
   //text-shadow: hsla(210,100%,20%) 0 0 4px;
   box-shadow:

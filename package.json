@@ -4,15 +4,33 @@
         "hyperapp": "^2.0.4"
     },
     "scripts": {
-        "build": "parcel build --public-url . src/index.html",
-        "watch": "parcel watch --public-url . src/index.html --no-hmr",
-        "serve": "parcel serve src/index.html"
+        "build": "parcel build --public-url . src/index.html --experimental-scope-hoisting",
+        "watch": "parcel watch --public-url . src/index.html",
+        "serve": "parcel serve --port 1236 src/index.html"
     },
     "repository": "https://github.com/shish/divetools2/",
     "license": "GPL-3.0-only",
     "devDependencies": {
         "parcel-bundler": "^1.12.4",
-        "sass": "^1.26.2",
+        "parcel-plugin-pwa-manifest": "^2.9.2",
+        "node-sass": "^4.12.0",
         "typescript": "^3.8.3"
+    },
+    "pwaManifest": {
+        "name": "DiveTools",
+        "shortName": "DiveTools",
+        "startURL": ".",
+        "x_theme": "#68c4d6",
+        "display": "standalone",
+        "orientation": "portrait",
+        "generateIconOptions": {
+            "baseIcon": "./src/static/favicon.svg",
+            "sizes": [
+                192,
+                384,
+                512
+            ],
+            "genFavicons": true
+        }
     }
 }

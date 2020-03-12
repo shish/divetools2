@@ -1,5 +1,4 @@
 import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
-import {State} from "../state";
 
 function saveStateAndGoBack(state: State) {
     state = {...state, screen: null};

@@ -1,6 +1,5 @@
 import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
 import {Screen} from "./base";
-import {State} from "../state";
 
 /* ================================================================= *\
  * VHF Channel List / Search
