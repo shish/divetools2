@@ -104,6 +104,7 @@ export function view(state: State) {
                     <Link screen={VhfChannels}>VHF Channels</Link>
                     <Link screen={PhoneticAlphabet}>Phonetic<br/>Alphabet</Link>
                 </section>
+                {/*
                 <h3>Checklists</h3>
                 <section>
                     <Link screen={TodoScreen}>Shore Dive</Link>
@@ -118,6 +119,7 @@ export function view(state: State) {
                     <Link screen={TodoScreen}>Other</Link>
                     <Link screen={TodoScreen}>Other</Link>
                 </section>
+                */}
             </nav>
         </Screen>;
     return <body>{body}</body>;
