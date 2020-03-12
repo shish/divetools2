@@ -1,6 +1,5 @@
 import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
 import {Screen, O2Percentage, O2CleanWarning, O2} from "./base";
-import {State} from "../state";
 
 function depth_to_bar(m: Meters): Bar {
     return ((m / 10) + 1) as Bar;

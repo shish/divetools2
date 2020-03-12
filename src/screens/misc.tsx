@@ -1,6 +1,5 @@
 import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
 import {Screen, O2Percentage, O2, BackButton} from "./base";
-import {State} from "../state";
 
 
 /* ================================================================= *\
@@ -107,7 +106,7 @@ export const Settings = ({state}: {state: State}) => (
                 <td>Max pP<O2/>:</td>
                 <td><input
                     type={"range"} min={1.3} max={1.6} step={0.1} value={state.settings.max_ppo2}
-                    onInput={(state: State, event: MyInputEvent) => ({
+                    oninput={(state: State, event: MyInputEvent) => ({
                         ...state,
                         settings: {
                             ...state.settings,
@@ -116,6 +115,34 @@ export const Settings = ({state}: {state: State}) => (
                     } as State)}
                 /></td>
                 <td>{state.settings.max_ppo2}bar</td>
+            </tr>
+            <tr>
+                <td>Max Depth:</td>
+                <td><input
+                    type={"range"} min={0} max={120} step={1} value={state.settings.max_depth}
+                    oninput={(state: State, event: MyInputEvent) => ({
+                        ...state,
+                        settings: {
+                            ...state.settings,
+                            max_depth: parseInt(event.target.value),
+                        }
+                    } as State)}
+                /></td>
+                <td>{state.settings.max_depth}m</td>
+            </tr>
+            <tr>
+                <td>Max Time:</td>
+                <td><input
+                    type={"range"} min={0} max={180} step={1} value={state.settings.max_time}
+                    oninput={(state: State, event: MyInputEvent) => ({
+                        ...state,
+                        settings: {
+                            ...state.settings,
+                            max_time: parseInt(event.target.value),
+                        }
+                    } as State)}
+                /></td>
+                <td>{state.settings.max_time}min</td>
             </tr>
         </table>
     </Screen>
