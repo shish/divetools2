@@ -1,6 +1,5 @@
 import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
 import {Screen, BackButton} from "./base";
-import {GetCurrentPosition} from "../effects";
 
 /* ================================================================= *\
  * VHF Channel List / Search

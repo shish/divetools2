@@ -1,10 +1,11 @@
 import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
+import { HistoryPush } from "hyperapp-fx";
 
 function saveStateAndGoBack(state: State) {
     state = {...state, screen: null};
     console.log("Saving state: ", state);
     window.localStorage.setItem("state", JSON.stringify(state));
-    return state;
+    return [state, HistoryPush({state})];
 }
 
 export const BackButton = () => (

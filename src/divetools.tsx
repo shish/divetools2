@@ -1,12 +1,17 @@
 /// <reference path='./divetools.d.ts'/>
 import {app, h} from "hyperapp";
 import deepmerge from "deepmerge";
+import { HistoryPush, HistoryPop, WatchPosition } from "hyperapp-fx";
 import { Decompression, DiveTable, SurfaceIntervalTimes, ResidualNitrogen } from "./screens/tables";
 import { MaxOperatingDepth, ContinuousNitroxBlend, PartialPressureNitroxBlend, BestMix, EquivalentAirDepth } from "./screens/nitrox";
 import { VhfChannels, PhoneticAlphabet } from "./screens/vhf";
 import { Settings, About } from "./screens/misc";
 import { Screen } from "./screens/base";
-import { WatchPosition } from "./effects";
+
+
+// ===========================================================================
+// Base State
+// ===========================================================================
 
 let state: State = {
     // global app bits
@@ -68,6 +73,11 @@ catch(err) {
     console.log("Error loading state:", err);
 }
 
+
+// ===========================================================================
+// Base View
+// ===========================================================================
+
 const TodoScreen = () => (
     <Screen title={"To-Do"}>
         This screen is in progress
@@ -75,10 +85,15 @@ const TodoScreen = () => (
 );
 
 const Link = ({screen}, children) => (
-    <a class={"button"} onClick={state => ({...state, screen: screen})}><div>{children}</div></a>
+    <a class={"button"} onClick={
+        state => [
+            {...state, screen: screen},
+            HistoryPush({state, title: "DiveTools: "+screen.name, url: "#"+screen.name})
+        ]
+    }><div>{children}</div></a>
 );
 
-export function view(state: State) {
+function view(state: State) {
     //return <body><PartialPressureNitroxBlend state={state} /></body>;
 
     let body = state.screen ? state.screen({state}) :
@@ -128,21 +143,36 @@ export function view(state: State) {
     return <body>{body}</body>;
 }
 
-const subscriptions = (state) => [
-    state.settings.geo_enabled && WatchPosition({
-        success: (state: State, position) => ({
-            ...state,
-            vhf_channels: {
-                ...state.vhf_channels,
-                geo_lat: position.coords.latitude,
-                geo_lon: position.coords.longitude,
-            }
-        }),
-        error: (state: State, error) => ({
-            ...state, settings: {...state.settings, geo_enabled: false}
-        }),
-    })
-];
+
+// ===========================================================================
+// Base Subscriptions
+// ===========================================================================
+
+const HistoryPopper = HistoryPop({
+    action: (state, event) => ({...state, screen: event.state.screen})
+});
+
+const PositionWatcher = WatchPosition({
+    action: (state: State, position) => ({
+        ...state,
+        vhf_channels: {
+            ...state.vhf_channels,
+            geo_lat: position.coords.latitude,
+            geo_lon: position.coords.longitude,
+        }
+    }),
+    error: (state: State, error) => ({
+        ...state, settings: {...state.settings, geo_enabled: false}
+    }),
+});
+
+function subscriptions(state) {
+    console.log("State updated");
+    return [
+        HistoryPopper,
+        state.settings.geo_enabled && PositionWatcher
+    ];
+}
 
 app({
     init: state,

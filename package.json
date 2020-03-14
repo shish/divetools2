@@ -2,7 +2,8 @@
     "name": "divetools2",
     "dependencies": {
         "deepmerge": "^4.2.2",
-        "hyperapp": "^2.0.4"
+        "hyperapp": "^2.0.4",
+        "hyperapp-fx": "github:shish/hyperapp-fx#eabef1da8f83ba85af7fda4112be7a11b44e1213"
     },
     "scripts": {
         "build": "parcel build --public-url . src/index.html --experimental-scope-hoisting",
