@@ -1,0 +1,18 @@
+make dive tables fit on screen nicely
+
+implement deco calculator based on dive tables
+
+VHF channel list
+
+VHF geolocation search
+
+Prompt for PWA install
+
+offline support
+- in general?
+- ios
+
+checklists
+- shore dive
+- boat dive
+- coxn

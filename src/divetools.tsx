@@ -1,16 +1,17 @@
 /// <reference path='./divetools.d.ts'/>
 import {app, h} from "hyperapp";
+import deepmerge from "deepmerge";
 import { Decompression, DiveTable, SurfaceIntervalTimes, ResidualNitrogen } from "./screens/tables";
 import { MaxOperatingDepth, ContinuousNitroxBlend, PartialPressureNitroxBlend, BestMix, EquivalentAirDepth } from "./screens/nitrox";
 import { VhfChannels, PhoneticAlphabet } from "./screens/vhf";
 import { Settings, About } from "./screens/misc";
 import { Screen } from "./screens/base";
+import { WatchPosition } from "./effects";
 
-export const state: State = {
+let state: State = {
     // global app bits
     screen: null,
 
-    // Max Operating Depth
     mod: {
         fo2: 0.32 as Fraction,
     },
@@ -34,6 +35,8 @@ export const state: State = {
 
     vhf_channels: {
         search: "",
+        geo_lat: null,
+        geo_lon: null,
     },
 
     phonetic: {
@@ -53,13 +56,13 @@ export const state: State = {
         tank_pressure_step: 5,
         max_depth: 56 as Meters,
         max_time: 60 as Minutes,
+        geo_enabled: false,
     }
 };
 
-let loaded_state: State = state;
 try {
     let saved_state = JSON.parse(window.localStorage.getItem("state") || "{}");
-    loaded_state = {...loaded_state, ...saved_state};
+    state = deepmerge(state, saved_state);
 }
 catch(err) {
     console.log("Error loading state:", err);
@@ -125,8 +128,25 @@ export function view(state: State) {
     return <body>{body}</body>;
 }
 
+const subscriptions = (state) => [
+    state.settings.geo_enabled && WatchPosition({
+        success: (state: State, position) => ({
+            ...state,
+            vhf_channels: {
+                ...state.vhf_channels,
+                geo_lat: position.coords.latitude,
+                geo_lon: position.coords.longitude,
+            }
+        }),
+        error: (state: State, error) => ({
+            ...state, settings: {...state.settings, geo_enabled: false}
+        }),
+    })
+];
+
 app({
-    init: loaded_state,
+    init: state,
     view: view,
+    subscriptions: subscriptions,
     node: document.body
 });

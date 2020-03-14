@@ -1,5 +1,6 @@
 import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
-import {Screen} from "./base";
+import {Screen, BackButton} from "./base";
+import {GetCurrentPosition} from "../effects";
 
 /* ================================================================= *\
  * VHF Channel List / Search
@@ -41,9 +42,40 @@ const ChannelSearch = ({filter}) => (
         )
 );
 
+const EnableGeoButton = () => (
+    <a class={"button"} onclick={
+        (state) => ({...state, settings: {...state.settings, geo_enabled: true}})
+    }>Search GPS</a>
+);
+
+function format_lat_lon(lat: number, lon: number) {
+    let lats = Math.abs(lat).toFixed(2);
+    let lons = Math.abs(lon).toFixed(2);
+    return (
+        (lat > 0 ? lats + "N" : lats + "S") +
+        ", " +
+        (lon > 0 ? lons + "E" : lons + "W")
+    );
+}
+const GeoSearch = ({state}: {state: State}) => (
+    [
+        <tr><td colspan={3}>&nbsp;</td></tr>,
+        (state.vhf_channels.geo_lat && state.vhf_channels.geo_lon) ?
+            [
+                <tr><th colspan={3}>
+                    Channels Near {format_lat_lon(state.vhf_channels.geo_lat, state.vhf_channels.geo_lon)}:
+                </th></tr>,
+                <ChannelSearch filter={(x) => (x.standard)} />
+            ] : <tr><th colspan={3}>(Can't detect GPS location)</th></tr>
+    ]
+);
+
 // TODO: local channels
 export const VhfChannels = ({state}: {state: State}) => (
-    <Screen title={"VHF Channels"}>
+    <Screen title={"VHF Channels"} footer={[
+        <BackButton/>,
+        navigator.geolocation && !state.settings.geo_enabled && <EnableGeoButton />
+    ]}>
         <input
             onInput={(state: State, event: MyInputEvent) => ({
                 ...state,
@@ -55,14 +87,15 @@ export const VhfChannels = ({state}: {state: State}) => (
         />
         <table class={"vhf"}>
             {state.vhf_channels.search ?
-            <ChannelSearch filter={(x) =>
-                (x.name.toLowerCase().indexOf(state.vhf_channels.search.toLowerCase()) !== -1)}
-                /> :
-            <tbody>
-                <tr><th colspan={3}>Standard Channels:</th></tr>
-                <ChannelSearch filter={(x) => (x.standard)} />
-            </tbody>
-        }
+                <ChannelSearch filter={(x) =>
+                    (x.name.toLowerCase().indexOf(state.vhf_channels.search.toLowerCase()) !== -1)}
+                    /> :
+                <tbody>
+                    <tr><th colspan={3}>Standard Channels:</th></tr>
+                    <ChannelSearch filter={(x) => (x.standard)} />
+                    {state.vhf_channels.geo_lat && state.vhf_channels.geo_lon && <GeoSearch state={state} />}
+                </tbody>
+            }
         </table>
     </Screen>
 );

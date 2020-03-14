@@ -35,6 +35,8 @@ type State = {
 
     vhf_channels: {
         search: string,
+        geo_lat: number,
+        geo_lon: number,
     },
 
     phonetic: {
@@ -54,5 +56,6 @@ type State = {
         tank_pressure_step: number,
         max_depth: Meters,
         max_time: Minutes,
+        geo_enabled: boolean,
     }
 }

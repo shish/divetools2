@@ -1,6 +1,7 @@
 {
     "name": "divetools2",
     "dependencies": {
+        "deepmerge": "^4.2.2",
         "hyperapp": "^2.0.4"
     },
     "scripts": {

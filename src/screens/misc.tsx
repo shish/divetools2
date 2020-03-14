@@ -158,6 +158,8 @@ export const About = () => (
         <h2>
             Created by Shish
         </h2>
+        <p>Email: <a href={"mailto:s@shish.io"}>s@shish.io</a></p>
+        <p>Source Code: <a href={"https://github.com/shish/DiveTools2"}>GitHub</a></p>
         <p>
             Ocean background
             by <a href={"https://commons.wikimedia.org/w/index.php?curid=20284104"}>Vanesa camaño</a>
