@@ -40,8 +40,11 @@ let state: State = {
 
     vhf_channels: {
         search: "",
-        geo_lat: null,
-        geo_lon: null,
+    },
+
+    location: {
+        lat: null,
+        lon: null,
     },
 
     phonetic: {
@@ -130,12 +133,12 @@ function view(state: State) {
                     <Link screen={TodoScreen}>Cox'n</Link>
                     <Link screen={TodoScreen}>Other</Link>
                 </section>
-                <h3>Other</h3>
+                <h3>The Sea</h3>
                 <section>
-                    <Link screen={TodoScreen}>Other</Link>
-                    <Link screen={TodoScreen}>Other</Link>
-                    <Link screen={TodoScreen}>Other</Link>
-                    <Link screen={TodoScreen}>Other</Link>
+                    <Link screen={TodoScreen}>Tides</Link>
+                    <Link screen={TodoScreen}>Weather</Link>
+                    <Link screen={TodoScreen}>Sea Maps</Link>
+                    <Link screen={TodoScreen}>Dive Spots</Link>
                 </section>
                 */}
             </nav>
@@ -155,10 +158,9 @@ const HistoryPopper = HistoryPop({
 const PositionWatcher = WatchPosition({
     action: (state: State, position) => ({
         ...state,
-        vhf_channels: {
-            ...state.vhf_channels,
-            geo_lat: position.coords.latitude,
-            geo_lon: position.coords.longitude,
+        location: {
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
         }
     }),
     error: (state: State, error) => ({
@@ -167,7 +169,6 @@ const PositionWatcher = WatchPosition({
 });
 
 function subscriptions(state) {
-    console.log("State updated");
     return [
         HistoryPopper,
         state.settings.geo_enabled && PositionWatcher

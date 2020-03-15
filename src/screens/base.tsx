@@ -3,7 +3,7 @@ import { HistoryPush } from "hyperapp-fx";
 
 function saveStateAndGoBack(state: State) {
     state = {...state, screen: null};
-    console.log("Saving state: ", state);
+    // console.log("Saving state: ", state);
     window.localStorage.setItem("state", JSON.stringify(state));
     return [state, HistoryPush({state})];
 }

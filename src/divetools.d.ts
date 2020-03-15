@@ -35,8 +35,11 @@ type State = {
 
     vhf_channels: {
         search: string,
-        geo_lat: number,
-        geo_lon: number,
+    },
+
+    location: {
+        lat: number,
+        lon: number,
     },
 
     phonetic: {

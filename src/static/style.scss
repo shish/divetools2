@@ -179,6 +179,15 @@ TABLE.vhf {
   TD:last-child {
     text-align: left;
   }
+  .duplex {
+    font-style: italic;
+  }
+  .channel::after {
+    content: ', ';
+  }
+  .channel:last-child::after {
+    content: '';
+  }
 }
 
 .donate {}
