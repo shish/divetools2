@@ -2,9 +2,9 @@ make dive tables fit on screen nicely
 
 implement deco calculator based on dive tables
 
-VHF channel list
+https://www.worldtides.info/apidocs
 
-VHF geolocation search
+VHF channel list
 
 Prompt for PWA install
 

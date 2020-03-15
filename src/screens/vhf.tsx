@@ -10,21 +10,24 @@ function intersect(a, b) {
 }
 
 // https://en.wikipedia.org/wiki/Marine_VHF_radio
-const DUPLEX = [83];  // TODO: complete list?
+const DUPLEX = [];  // 83, TODO: complete list?
 // const VHF_RANGE = 35;  // "30-40 miles"
 
 const STATIONS = [
     // Standard Channels
-    {name: "Ship-to-ship", channels: [6, 8, 72, 77], standard: true},
+    {name: "Ship-to-ship", channels: [6, 8], standard: true},
     {name: "Port Operations", channels: [12, 14], standard: true},
     {name: "Bridge-to-bridge", channels: [13], standard: true},
     {name: "Distress, Urgency, Safety & Calling", channels: [16], standard: true},
     {name: "Coast Guard", channels: [67], standard: true},
     {name: "DSC (No Voice)", channels: [70], standard: true},
+    {name: "Ship-to-ship", channels: [72, 77], standard: true},
     {name: "Marina", channels: ["M"], standard: true},
-    // Places
+
+    // Ports
     {name: "Dublin Port",               channels: [12], coords: {lat: 53.3494, lon: -6.2022}},
     {name: "Dun Laoghaire Port",        channels: [14], coords: {lat: 53.3024, lon: -6.1264}},
+
     // Coast guard: http://www.malinheadcoastguardradio.com/vhf%20network.html
     // Dublin MRCC
     {name: "Carlingford Coast Guard",   channels: [67,  4], coords: {lat: 54.04, lon: -6.16}}, // approx
