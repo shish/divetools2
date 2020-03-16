@@ -1,10 +1,11 @@
 make dive tables fit on screen nicely
 
-implement deco calculator based on dive tables
+implement full deco calculator based on dive tables
 
-https://www.worldtides.info/apidocs
+Tide times: https://www.worldtides.info/apidocs
+Weather: ??
 
-VHF channel list
+Full VHF channel list?
 
 Prompt for PWA install
 

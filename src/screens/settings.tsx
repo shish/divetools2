@@ -1,5 +1,5 @@
-import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
-import {Screen, O2Percentage, O2, BackButton} from "./base";
+import {h} from "hyperapp"; // JSX will be turned into "h" by rollup
+import {BackButton, O2, O2Percentage, Screen} from "./base";
 
 
 /* ================================================================= *\
@@ -145,30 +145,5 @@ export const Settings = ({state}: {state: State}) => (
                 <td>{state.settings.max_time}min</td>
             </tr>
         </table>
-    </Screen>
-);
-
-
-/* ================================================================= *\
- * Donate
-\* ================================================================= */
-
-export const About = () => (
-    <Screen title={"About"}>
-        <h2>
-            Created by Shish
-        </h2>
-        <p>Email: <a href={"mailto:s@shish.io"}>s@shish.io</a></p>
-        <p>Source Code: <a href={"https://github.com/shish/DiveTools2"}>GitHub</a></p>
-        <p>
-            Ocean background
-            by <a href={"https://commons.wikimedia.org/w/index.php?curid=20284104"}>Vanesa camaño</a>
-            <br/>- CC BY-SA 3.0
-        </p>
-        <p className={"donate"}>
-            If you like this app and find it useful,
-            <br/>feel free to donate
-            via <a href={"https://paypal.me/shish2k"}>PayPal</a>
-        </p>
     </Screen>
 );

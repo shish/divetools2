@@ -2,11 +2,17 @@
 import {app, h} from "hyperapp";
 import deepmerge from "deepmerge";
 import { HistoryPush, HistoryPop, WatchPosition } from "hyperapp-fx";
-import { Decompression, DiveTable, SurfaceIntervalTimes, ResidualNitrogen } from "./screens/tables";
-import { MaxOperatingDepth, ContinuousNitroxBlend, PartialPressureNitroxBlend, BestMix, EquivalentAirDepth } from "./screens/nitrox";
-import { VhfChannels, PhoneticAlphabet } from "./screens/vhf";
-import { Settings, About } from "./screens/misc";
-import { Screen } from "./screens/base";
+// import { DiveTable, SurfaceIntervalTimes, ResidualNitrogen } from "./screens/tables";
+import {ContinuousNitroxBlend, PartialPressureNitroxBlend} from "./screens/nitrox";
+import {VhfChannels} from "./screens/vhf";
+import {Settings} from "./screens/settings";
+import {Screen} from "./screens/base";
+import {About} from "./screens/about";
+import {EquivalentAirDepth} from "./screens/ead";
+import {MaxOperatingDepth} from "./screens/mod";
+import {BestMix} from "./screens/bestmix";
+import {Decompression} from "./screens/deco";
+import {PhoneticAlphabet} from "./screens/phonetic";
 
 
 // ===========================================================================
@@ -135,14 +141,20 @@ function view(state: State) {
                     <Link screen={TodoScreen}>Cox'n</Link>
                     <Link screen={TodoScreen}>Other</Link>
                 </section>
-                <h3>The Sea</h3>
+                */}
+                <h3>Dive Log (Coming Later)</h3>
+                <section>
+                    <Link screen={TodoScreen}>Usual Buddies</Link>
+                    <Link screen={TodoScreen}>Dive Log</Link>
+                </section>
+                <h3>The Sea (Coming Later)</h3>
                 <section>
                     <Link screen={TodoScreen}>Tides</Link>
                     <Link screen={TodoScreen}>Weather</Link>
                     <Link screen={TodoScreen}>Sea Maps</Link>
                     <Link screen={TodoScreen}>Dive Spots</Link>
                 </section>
-                */}
+                <p>&nbsp;</p>
             </nav>
         </Screen>;
     return <body>{body}</body>;

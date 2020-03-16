@@ -1,59 +1,5 @@
-import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
-import {Screen, O2Percentage, O2CleanWarning, O2} from "./base";
-
-function depth_to_bar(m: Meters): Bar {
-    return ((m / 10) + 1) as Bar;
-}
-function bar_to_depth(b: Bar): Meters {
-    return ((b - 1) * 10) as Meters;
-}
-
-/* ================================================================= *\
- * MOD Calculator
-\* ================================================================= */
-
-export const MaxOperatingDepth = ({state}: {state: State}) => (
-    <Screen title={"Max Operating Depth"} notice={<O2CleanWarning fo2={state.mod.fo2} />}>
-        <h2>
-            EAN <O2/> Level: <O2Percentage fo2={state.mod.fo2} />
-        </h2>
-
-        <input
-            type={"range"}
-            min={state.settings.min_fo2}
-            max={state.settings.max_fo2}
-            value={state.mod.fo2}
-            step={0.01}
-            onInput={(state: State, event: MyInputEvent) => ({
-                ...state, mod: {fo2: parseFloat(event.target.value)}
-            } as State)}
-        />
-        <h2>Max Operating Depth: {Math.floor(((state.settings.max_ppo2 / state.mod.fo2) - 1) * 10)}m</h2>
-        <p>Max Operating Pressure: {Math.floor(state.settings.max_ppo2 / state.mod.fo2 * 10)/10}bar</p>
-        <p>(Using max pP<O2/> = {state.settings.max_ppo2}bar)</p>
-    </Screen>
-);
-
-export const BestMix = ({state}: {state: State}) => (
-    <Screen title={"Best Mix for Depth"} notice={<O2CleanWarning fo2={state.settings.max_ppo2 / depth_to_bar(state.best_mix.mod) as Fraction} />}>
-        <h2>Max Operating Depth: {state.best_mix.mod}m</h2>
-        <input
-            type={"range"}
-            min={25}
-            max={56}
-            value={state.best_mix.mod}
-            onInput={(state: State, event: MyInputEvent) => ({
-                ...state, best_mix: {mod: parseInt(event.target.value)}
-            } as State)}
-        />
-        <h2>
-            Max EAN <O2/> Level: <O2Percentage fo2={state.settings.max_ppo2 / depth_to_bar(state.best_mix.mod) as Fraction} />
-        </h2>
-        <p>Max Operating Pressure: {Math.floor(depth_to_bar(state.best_mix.mod)*10)/10}bar</p>
-        <p>(Using max pP<O2/> = {state.settings.max_ppo2}bar)</p>
-    </Screen>
-);
-
+import {h} from "hyperapp"; // JSX will be turned into "h" by rollup
+import {O2, O2CleanWarning, O2Percentage, Screen} from "./base";
 
 /* ================================================================= *\
  * Continuous Blending Calculator
@@ -188,7 +134,7 @@ export const ContinuousNitroxBlend = ({state}: {state: State}) => (
  * Partial Pressure Blending Calculator
 \* ================================================================= */
 
-/*
+/**
  * final_o2% - topup_o2%
  * ---------------------  * fill_pressure = fill o2 pressure
  *        topup_n2%
@@ -227,52 +173,5 @@ export const PartialPressureNitroxBlend = ({state}: {state: State}) => (
             }
 
         </h2>
-    </Screen>
-);
-
-
-/* ================================================================= *\
- * Equivalent Air Depth
-\* ================================================================= */
-
-function fo2_to_fn2(o2: Fraction): Fraction {
-    return (1.0 - o2) as Fraction;
-}
-function partial_pressure(p: Bar, f: Fraction): Bar {
-    return (f * p) as Bar;
-}
-
-function ead(depth: Meters, fo2: Fraction): Meters {
-    const pressure: Bar = depth_to_bar(depth);
-    const fn2: Fraction = fo2_to_fn2(fo2);
-    const ppn2: Bar = partial_pressure(pressure, fn2);
-    const equivalent_air_pressure: Bar = (ppn2 / 0.79) as Bar;
-    return bar_to_depth(equivalent_air_pressure);
-}
-
-export const EquivalentAirDepth = ({state}: {state: State}) => (
-    <Screen title={"Equivalent Air Depth"}>
-        <h2>Depth: {state.ead.depth}m</h2>
-        <input
-            type={"range"}
-            min={0}
-            max={100}
-            value={state.ead.depth}
-            onInput={(state: State, event: MyInputEvent) => ({
-                ...state, ead: {...state.ead, depth: parseInt(event.target.value)}
-            }) as State}
-        />
-        <h2>Mix: <O2Percentage fo2={state.ead.fo2} /> <O2 /></h2>
-        <input
-            type={"range"}
-            min={state.settings.min_fo2}
-            max={state.settings.max_fo2}
-            step={0.01}
-            value={state.ead.fo2}
-            onInput={(state: State, event: MyInputEvent) => ({
-                ...state, ead: {...state.ead, fo2: parseFloat(event.target.value)}
-            } as State)}
-        />
-        <h2>Equivalent Air Depth: {Math.round(ead(state.ead.depth, state.ead.fo2))}m</h2>
     </Screen>
 );

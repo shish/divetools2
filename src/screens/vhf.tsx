@@ -1,5 +1,5 @@
-import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
-import {Screen, BackButton} from "./base";
+import {h} from "hyperapp"; // JSX will be turned into "h" by rollup
+import {BackButton, Screen} from "./base";
 
 /* ================================================================= *\
  * VHF Channel List / Search
@@ -130,7 +130,6 @@ const GeoSearch = ({state}: {state: State}) => (
     ]
 );
 
-// TODO: local channels
 export const VhfChannels = ({state}: {state: State}) => (
     <Screen title={"VHF Channels"} footer={[
         <BackButton/>,
@@ -157,88 +156,5 @@ export const VhfChannels = ({state}: {state: State}) => (
                 </tbody>
             }
         </table>
-    </Screen>
-);
-
-
-/* ================================================================= *\
- * Phonetic Alphabet
-\* ================================================================= */
-
-const ALPHABET = {
-    a: 'Alpha',
-    b: 'Bravo',
-    c: 'Charlie',
-    d: 'Delta',
-    e: 'Echo',
-    f: 'Foxtrot',
-    g: 'Golf',
-    h: 'Hotel',
-    i: 'India',
-    j: 'Juliet',
-    k: 'Kilo',
-    l: 'Lima',
-    m: 'Mike',
-    n: 'November',
-    o: 'Oscar',
-    p: 'Papa',
-    q: 'Quebec',
-    r: 'Romeo',
-    s: 'Sierra',
-    t: 'Tango',
-    u: 'Uniform',
-    v: 'Victor',
-    w: 'Whisky',
-    x: 'Xray',
-    y: 'Yankee',
-    z: 'Zulu',
-    ' ': ' - ',
-};
-
-function word_to_phonetic(word: string): string {
-    let words = "";
-    for(let i=0; i<word.length; i++) {
-        words += ALPHABET[word[i].toLowerCase()] + " ";
-    }
-    return words;
-}
-
-function alpha_table() {
-    let c1 = [];
-    let c2 = [];
-    let n = 0;
-    for(let k in ALPHABET) {
-        if(k === ' ') continue;
-        if(n < 13) {
-            c1.push(<tr><td>{k}</td><td>-</td><td>{ALPHABET[k]}</td></tr>);
-        }
-        else {
-            c2.push(<tr><td>{k}</td><td>-</td><td>{ALPHABET[k]}</td></tr>);
-        }
-        n++;
-    }
-    return <table className={"phonetic"}>
-        <tr>
-            <td>
-                <table>{c1}</table>
-            </td>
-            <td>
-                <table>{c2}</table>
-            </td>
-        </tr>
-    </table>;
-}
-
-export const PhoneticAlphabet = ({state}: {state: State}) => (
-    <Screen title={"Phonetic Alphabet"}>
-        <input
-            onInput={(state: State, event: MyInputEvent) => ({
-                ...state, phonetic: {word: event.target.value}
-            } as State)}
-            value={state.phonetic.word}
-            placeholder={"Enter text to translate"}
-        />
-        <p>{word_to_phonetic(state.phonetic.word)}</p>
-        {alpha_table()}
     </Screen>
 );
