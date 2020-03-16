@@ -3,8 +3,17 @@
     <head>
         <title>DiveTools2</title>
         <meta name="viewport" content="width=device-width">
+        <meta name="description" content="A collection of SCUBA-diving related tools">
         <link href="static/style.scss" rel="stylesheet" type="text/css" />
     </head>
     <body><noscript>This page requires JavaScript</noscript></body>
     <script src="divetools.tsx"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                // Mangle the name so that parcel doesn't try to bundle it
+                navigator.serviceWorker.register('/sw' + '.js');
+            });
+        }
+    </script>
 </html>

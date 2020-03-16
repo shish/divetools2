@@ -7,8 +7,6 @@ Weather: ??
 
 Full VHF channel list?
 
-Prompt for PWA install
-
-offline support
-- in general?
-- ios
+Android PWA Prompt
+Android offline support
+iOS Homescreen prompt: https://dockyard.com/blog/2017/09/27/encouraging-pwa-installation-on-ios
