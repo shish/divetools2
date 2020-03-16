@@ -105,20 +105,22 @@ function view(state: State) {
             <Link screen={About}>About</Link>
         ]}>
             <nav>
-                <h3>Tables</h3>
+                <h3>Decompression</h3>
                 <section>
                     <Link screen={Decompression}>Decompression<br/>Calculator</Link>
+                    <Link screen={EquivalentAirDepth}>Equivalent<br/>Air Depth</Link>
+                    {/*
                     <Link screen={DiveTable}>Dive Table</Link>
                     <Link screen={SurfaceIntervalTimes}>Surface<br/>Intervals</Link>
                     <Link screen={ResidualNitrogen}>Residual<br/>Nitrogen</Link>
+                    */}
                 </section>
-                <h3>Gasses</h3>
+                <h3>Nitrox</h3>
                 <section>
                     <Link screen={MaxOperatingDepth}>Max Operating<br/>Depth</Link>
                     <Link screen={BestMix}>Best Mix<br/>For Depth</Link>
                     <Link screen={ContinuousNitroxBlend}>Continuous<br/>Blending</Link>
                     <Link screen={PartialPressureNitroxBlend}>Partial Pressure<br/>Blending</Link>
-                    <Link screen={EquivalentAirDepth}>Equivalent<br/>Air Depth</Link>
                 </section>
                 <h3>Radio</h3>
                 <section>

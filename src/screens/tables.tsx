@@ -1,7 +1,9 @@
 import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
-import {Screen} from "./base";
+import {O2, Screen} from "./base";
 import dive_table from '../static/dive-table.jpg';
-import repetitive_dive_table from '../static/repetitive-dive-table.jpg';
+import surface_interval_times from '../static/surface-interval-times.jpg';
+import residual_nitrogen_times from '../static/residual-nitrogen-times.jpg';
+// import repetitive_dive_table from '../static/repetitive-dive-table.jpg';
 
 const DIVE_TABLE = {
     12: {
@@ -152,6 +154,7 @@ function get_dive_table(depth, time) {
 
 export const Decompression = ({state}: {state: State}) => (
     <Screen title={"Decompression Stops"}>
+        <p>(Assuming <O2/> at 21%, one dive per day)</p>
         <h2>Depth: {state.dive_table.depth}m</h2>
         <input
             type={"range"}
@@ -194,12 +197,12 @@ export const DiveTable = () => (
 
 export const SurfaceIntervalTimes = () => (
     <Screen title={"Surface Intervals"} blank={false}>
-        <img alt={"Surface Interval Times"} src={repetitive_dive_table} />
+        <img alt={"Surface Interval Times"} src={surface_interval_times} />
     </Screen>
 );
 
 export const ResidualNitrogen = () => (
     <Screen title={"Residual Nitrogen"} blank={false}>
-        <img alt={"Residual Nitrogen"} src={repetitive_dive_table} />
+        <img alt={"Residual Nitrogen"} src={residual_nitrogen_times} />
     </Screen>
 );
