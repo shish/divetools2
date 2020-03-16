@@ -12,8 +12,3 @@ Prompt for PWA install
 offline support
 - in general?
 - ios
-
-checklists
-- shore dive
-- boat dive
-- coxn
