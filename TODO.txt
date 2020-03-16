@@ -9,3 +9,6 @@ Full VHF channel list?
 
 Android PWA Prompt
 iOS Homescreen prompt: https://dockyard.com/blog/2017/09/27/encouraging-pwa-installation-on-ios
+
+Browser History support
+Hash location for each page (eg #diveTables)
