@@ -12,7 +12,7 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 // Mangle the name so that parcel doesn't try to bundle it
-                //navigator.serviceWorker.register('/sw' + '.js');
+                navigator.serviceWorker.register('/sw' + '.js');
             });
         }
     </script>
