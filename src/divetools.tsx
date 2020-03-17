@@ -1,6 +1,5 @@
 /// <reference path='./divetools.d.ts'/>
 import {app, h} from "hyperapp";
-import deepmerge from "deepmerge";
 import {WatchPosition} from "hyperapp-fx";
 import {AutoHistory} from "hyperapp-auto-history";
 // import { DiveTable, SurfaceIntervalTimes, ResidualNitrogen } from "./screens/tables";
@@ -77,8 +76,10 @@ let state: State = {
 };
 
 try {
-    let saved_state = JSON.parse(window.localStorage.getItem("state") || "{}");
-    state = deepmerge(state, saved_state);
+    state.settings = {
+        ...state.settings,
+        ...JSON.parse(window.localStorage.getItem("settings") || "{}")
+    };
 }
 catch(err) {
     console.log("Error loading state:", err);

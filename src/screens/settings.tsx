@@ -1,24 +1,31 @@
 import {h} from "hyperapp"; // JSX will be turned into "h" by rollup
-import {BackButton, O2, O2Percentage, Screen} from "./base";
+import {O2, O2Percentage, Screen} from "./base";
 
 
 /* ================================================================= *\
  * Settings
 \* ================================================================= */
 
+function saveSettings(state) {
+    window.localStorage.setItem("settings", JSON.stringify(state.settings));
+    return {...state, screen: null};
+}
 function resetSettings() {
     console.log("Removing state from localStorage");
-    window.localStorage.removeItem("state");
+    window.localStorage.removeItem("settings");
     window.location.reload();
     return null;
 }
 
+const SaveButton = () => (
+    <a class={"button"} onclick={saveSettings}>Save</a>
+);
 const ResetButton = () => (
     <a class={"button"} onClick={resetSettings}>Reset</a>
 );
 
 export const Settings = ({state}: {state: State}) => (
-    <Screen title={"Settings"} footer={[<BackButton/>, <ResetButton />]}>
+    <Screen title={"Settings"} footer={[<SaveButton/>, <ResetButton />]}>
         <table className={"settings"}>
             <tr>
                 <td>Min <O2/></td>

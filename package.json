@@ -1,11 +1,9 @@
 {
     "name": "divetools2",
     "dependencies": {
-        "deepmerge": "^4.2.2",
         "hyperapp": "^2.0.4",
         "hyperapp-auto-history": "^1.0.2",
-        "hyperapp-fx": "github:shish/hyperapp-fx#eabef1da8f83ba85af7fda4112be7a11b44e1213",
-        "parcel-plugin-appcache": "^0.1.1"
+        "hyperapp-fx": "github:shish/hyperapp-fx#eabef1da8f83ba85af7fda4112be7a11b44e1213"
     },
     "scripts": {
         "build": "parcel build --public-url . src/index.html --experimental-scope-hoisting",
@@ -19,6 +17,7 @@
         "parcel-bundler": "^1.12.4",
         "parcel-plugin-pwa-manifest": "^2.9.2",
         "parcel-plugin-sw-cache": "^0.3.1",
+        "parcel-plugin-appcache": "^0.1.1",
         "typescript": "^3.8.3"
     },
     "pwaManifest": {
