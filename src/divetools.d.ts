@@ -11,7 +11,7 @@ type Fraction = number & { __fraction__: void };
 type Minutes = number & { __minutes__: void };
 
 type State = {
-    screen: any,
+    screen: string,
 
     mod: {
         fo2: Fraction,

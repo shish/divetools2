@@ -3,6 +3,7 @@ import {app, h} from "hyperapp";
 import deepmerge from "deepmerge";
 import { HistoryPush, HistoryPop, WatchPosition } from "hyperapp-fx";
 // import { DiveTable, SurfaceIntervalTimes, ResidualNitrogen } from "./screens/tables";
+import {GoToScreen, title2hash} from "./screens/base";
 import {ContinuousNitroxBlend, PartialPressureNitroxBlend} from "./screens/nitrox";
 import {VhfChannels} from "./screens/vhf";
 import {Settings} from "./screens/settings";
@@ -81,6 +82,9 @@ try {
 catch(err) {
     console.log("Error loading state:", err);
 }
+if(window.location.hash) {
+    state.screen = window.location.hash.slice(1);
+}
 
 
 // ===========================================================================
@@ -93,67 +97,89 @@ const TodoScreen = () => (
     </Screen>
 );
 
-const Link = ({screen}, children) => (
-    <a class={"button"} onClick={
-        state => [
-            {...state, screen: screen},
-            HistoryPush({state, title: "DiveTools: "+screen.name, url: "#"+screen.name})
-        ]
-    }><div>{children}</div></a>
+const SCREENS = {
+    "Decompression": {
+        "Decompression\nCalculator": Decompression,
+        "Equivalent\nAir Depth": EquivalentAirDepth,
+        // "Dive Table": DiveTable,
+        // "Surface\nIntervals": SurfaceIntervalTimes,
+        // "Residual\nNitrogen": ResidualNitrogen,
+    },
+    "Nitrox": {
+        "Max Operating\nDepth": MaxOperatingDepth,
+        "Best Mix\nFor Depth": BestMix,
+        "Continuous\nBlending": ContinuousNitroxBlend,
+        "Partial Pressure\nBlending": PartialPressureNitroxBlend,
+    },
+    "Radio": {
+        "VHF Channels": VhfChannels,
+        "Phonetic\nAlphabet": PhoneticAlphabet,
+    },
+    /*"Checklists": {
+        <Link screen={TodoScreen}>"Shore Dive</Link>
+        <Link screen={TodoScreen}>Boat Dive</Link>
+        <Link screen={TodoScreen}>Cox'n</Link>
+        <Link screen={TodoScreen}>Other</Link>
+    },*/
+    "Dive Log (Coming Later)": {
+        "Usual Buddies": TodoScreen,
+        "Dive Log": TodoScreen,
+    },
+    "The Sea (Coming Later)": {
+        "Tides": TodoScreen,
+        "Weather": TodoScreen,
+        "Sea Maps": TodoScreen,
+        "Dive Spots": TodoScreen,
+    },
+    "hidden": {
+        "Settings": Settings,
+        "About": About,
+    }
+};
+
+function nl2br(s: string) {
+    let parts = s.split("\n");
+    let result = [];
+    for(let i=0; i<parts.length; i++) {
+        result.push(parts[i]);
+        if(i<parts.length-1) result.push(<br/>);
+    }
+    return result;
+}
+const Link = ({title}) => (
+    <a class={"button"} onClick={[GoToScreen, title]}><div>{nl2br(title)}</div></a>
 );
 
 function view(state: State) {
-    //return <body><PartialPressureNitroxBlend state={state} /></body>;
-
-    let body = state.screen ? state.screen({state}) :
+    let screen = null;
+    for(let section in SCREENS) {
+        for(let name in SCREENS[section]) {
+            if (title2hash(name) == state.screen) {
+                screen = SCREENS[section][name];
+            }
+        }
+    }
+    let body = screen ? screen({state}) :
         <Screen title={"Dive Tools"} blank={false} footer={[
-            <Link screen={Settings}>Settings</Link>,
-            <Link screen={About}>About</Link>
+            <Link title={"Settings"} />,
+            <Link title={"About"} />,
         ]}>
             <nav>
-                <h3>Decompression</h3>
-                <section>
-                    <Link screen={Decompression}>Decompression<br/>Calculator</Link>
-                    <Link screen={EquivalentAirDepth}>Equivalent<br/>Air Depth</Link>
-                    {/*
-                    <Link screen={DiveTable}>Dive Table</Link>
-                    <Link screen={SurfaceIntervalTimes}>Surface<br/>Intervals</Link>
-                    <Link screen={ResidualNitrogen}>Residual<br/>Nitrogen</Link>
-                    */}
-                </section>
-                <h3>Nitrox</h3>
-                <section>
-                    <Link screen={MaxOperatingDepth}>Max Operating<br/>Depth</Link>
-                    <Link screen={BestMix}>Best Mix<br/>For Depth</Link>
-                    <Link screen={ContinuousNitroxBlend}>Continuous<br/>Blending</Link>
-                    <Link screen={PartialPressureNitroxBlend}>Partial Pressure<br/>Blending</Link>
-                </section>
-                <h3>Radio</h3>
-                <section>
-                    <Link screen={VhfChannels}>VHF Channels</Link>
-                    <Link screen={PhoneticAlphabet}>Phonetic<br/>Alphabet</Link>
-                </section>
-                {/*
-                <h3>Checklists</h3>
-                <section>
-                    <Link screen={TodoScreen}>Shore Dive</Link>
-                    <Link screen={TodoScreen}>Boat Dive</Link>
-                    <Link screen={TodoScreen}>Cox'n</Link>
-                    <Link screen={TodoScreen}>Other</Link>
-                </section>
-                */}
-                <h3>Dive Log (Coming Later)</h3>
-                <section>
-                    <Link screen={TodoScreen}>Usual Buddies</Link>
-                    <Link screen={TodoScreen}>Dive Log</Link>
-                </section>
-                <h3>The Sea (Coming Later)</h3>
-                <section>
-                    <Link screen={TodoScreen}>Tides</Link>
-                    <Link screen={TodoScreen}>Weather</Link>
-                    <Link screen={TodoScreen}>Sea Maps</Link>
-                    <Link screen={TodoScreen}>Dive Spots</Link>
-                </section>
+                {
+                    Object.keys(SCREENS)
+                        .filter((x) => (x !== "hidden"))
+                        .map((k) =>
+                            <div>
+                                <h3>{k}</h3>,
+                                <section>
+                                    {
+                                        Object.keys(SCREENS[k])
+                                            .map((l) => <Link title={l} />)
+                                    }
+                                </section>
+                            </div>
+                        )
+                }
                 <p>&nbsp;</p>
             </nav>
         </Screen>;
