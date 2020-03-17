@@ -1,5 +1,4 @@
-import {h} from "hyperapp";  // JSX will be turned into "h" by rollup
-import { HistoryPush } from "hyperapp-fx";
+import {h} from "hyperapp";
 
 function nl2sp(s: string) {
     return s.replace(/\n/g, " ");
@@ -9,12 +8,6 @@ export function title2hash(s: string) {
 }
 export const GoToScreen = (state, title) => [
     {...state, screen: title ? title2hash(title) : null},
-    HistoryPush({
-        state: {...state, screen: title ? title2hash(title) : null},
-        title: title ? "DiveTools: "+nl2sp(title) : "DiveTools",
-        url: title ? "#"+title2hash(title) : "#root"
-    })
-    // window.localStorage.setItem("state", JSON.stringify(state));
 ];
 export const BackButton = () => (
     <a className={"button"} onclick={[GoToScreen, null]}>Back</a>

@@ -1,7 +1,8 @@
 /// <reference path='./divetools.d.ts'/>
 import {app, h} from "hyperapp";
 import deepmerge from "deepmerge";
-import { HistoryPush, HistoryPop, WatchPosition } from "hyperapp-fx";
+import {WatchPosition} from "hyperapp-fx";
+import {AutoHistory} from "hyperapp-auto-history";
 // import { DiveTable, SurfaceIntervalTimes, ResidualNitrogen } from "./screens/tables";
 import {GoToScreen, title2hash} from "./screens/base";
 import {ContinuousNitroxBlend, PartialPressureNitroxBlend} from "./screens/nitrox";
@@ -81,9 +82,6 @@ try {
 }
 catch(err) {
     console.log("Error loading state:", err);
-}
-if(window.location.hash) {
-    state.screen = window.location.hash.slice(1);
 }
 
 
@@ -191,10 +189,6 @@ function view(state: State) {
 // Base Subscriptions
 // ===========================================================================
 
-const HistoryPopper = HistoryPop({
-    action: (state, event) => ({...state, screen: event.state.screen})
-});
-
 const PositionWatcher = WatchPosition({
     action: (state: State, position) => ({
         ...state,
@@ -208,9 +202,16 @@ const PositionWatcher = WatchPosition({
     }),
 });
 
+const HistoryManager = AutoHistory({
+    init: state,
+    push: ["screen"],
+    replace: []
+});
+
 function subscriptions(state) {
+    HistoryManager.push_state_if_changed(state);
     return [
-        HistoryPopper,
+        HistoryManager,
         state.settings.geo_enabled && PositionWatcher
     ];
 }
