@@ -169,7 +169,7 @@ function view(state: State) {
                         .filter((x) => (x !== "hidden"))
                         .map((k) =>
                             <div>
-                                <h3>{k}</h3>,
+                                <h3>{k}</h3>
                                 <section>
                                     {
                                         Object.keys(SCREENS[k])
