@@ -17,4 +17,4 @@ VOLUME /logs
 HEALTHCHECK --interval=1m --timeout=3s CMD curl --fail http://127.0.0.1/ || exit 1
 RUN apk add --no-cache curl thttpd
 COPY --from=build /app/dist /www
-CMD thttpd -D -d /www
+CMD thttpd -D -l /dev/stderr -d /www
