@@ -16,8 +16,6 @@
         "node-sass": "^4.12.0",
         "parcel-bundler": "^1.12.4",
         "parcel-plugin-pwa-manifest": "^2.9.2",
-        "parcel-plugin-sw-cache": "^0.3.1",
-        "parcel-plugin-appcache": "^0.1.1",
         "typescript": "^3.8.3"
     },
     "pwaManifest": {
@@ -36,11 +34,5 @@
             ],
             "genFavicons": true
         }
-    },
-    "cache": {
-        "disablePlugin": false,
-        "inDev": true,
-        "strategy": "default",
-        "clearDist": true
     }
 }
