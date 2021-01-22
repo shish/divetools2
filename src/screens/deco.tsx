@@ -1,4 +1,4 @@
-import {h} from "hyperapp";
+import h from "hyperapp-jsx-pragma";
 import {O2, Screen} from "./base";
 
 const DIVE_TABLE = {

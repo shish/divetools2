@@ -1,4 +1,4 @@
-import {h} from "hyperapp"; // JSX will be turned into "h" by rollup
+import h from "hyperapp-jsx-pragma";
 import {BackButton, Screen} from "./base";
 
 /* ================================================================= *\
@@ -64,7 +64,7 @@ const StationList = ({state, stations}) => (
                 <td>
                     {x.name}
                     {x.coords && state.location.lon &&
-                        " (" + getDistanceFromLatLonInKm(x.coords, state.location).toFixed(1) + "km)"
+                        " (" + getDistanceFromLatLoninKm(x.coords, state.location).toFixed(1) + "km)"
                     }
                 </td>
             </tr>)
@@ -88,7 +88,7 @@ function format_lat_lon({lat, lon}: {lat: number, lon: number}) {
 }
 
 //
-function getDistanceFromLatLonInKm(p1, p2) {
+function getDistanceFromLatLoninKm(p1, p2) {
     let lat1 = p1.lat;
     let lon1 = p1.lon;
     let lat2 = p2.lat;
@@ -111,8 +111,8 @@ function deg2rad(deg) {
 
 function sort_by_distance(channels, position) {
     return channels.sort((a, b) => (
-        getDistanceFromLatLonInKm(a.coords, position) >
-        getDistanceFromLatLonInKm(b.coords, position)
+        getDistanceFromLatLoninKm(a.coords, position) >
+        getDistanceFromLatLoninKm(b.coords, position)
     ) ? 1 : -1);
 }
 const GeoSearch = ({state}: {state: State}) => (
@@ -136,7 +136,7 @@ export const VhfChannels = ({state}: {state: State}) => (
         navigator.geolocation && !state.settings.geo_enabled && <EnableGeoButton />
     ]}>
         <input
-            onInput={(state: State, event: MyInputEvent) => ({
+            oninput={(state: State, event: MyInputEvent) => ({
                 ...state,
                 vhf_channels: {
                     search: event.target.value,

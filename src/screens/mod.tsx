@@ -1,4 +1,4 @@
-import {h} from "hyperapp";
+import h from "hyperapp-jsx-pragma";
 import {O2, O2CleanWarning, O2Percentage, Screen} from "./base";
 
 
@@ -14,7 +14,7 @@ export const MaxOperatingDepth = ({state}: { state: State }) => (
             max={state.settings.max_fo2}
             value={state.mod.fo2}
             step={0.01}
-            onInput={(state: State, event: MyInputEvent) => ({
+            oninput={(state: State, event: MyInputEvent) => ({
                 ...state, mod: {fo2: parseFloat(event.target.value)}
             } as State)}
         />

@@ -1,4 +1,4 @@
-import {h} from "hyperapp";
+import h from "hyperapp-jsx-pragma";
 import {O2, O2CleanWarning, O2Percentage, Screen} from "./base";
 import {depth_to_bar} from "../math";
 
@@ -11,7 +11,7 @@ export const BestMix = ({state}: { state: State }) => (
             min={25}
             max={56}
             value={state.best_mix.mod}
-            onInput={(state: State, event: MyInputEvent) => ({
+            oninput={(state: State, event: MyInputEvent) => ({
                 ...state, best_mix: {mod: parseInt(event.target.value)}
             } as State)}
         />

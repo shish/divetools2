@@ -1,4 +1,4 @@
-import {h} from "hyperapp";
+import h from "hyperapp-jsx-pragma";
 import {O2, O2Percentage, Screen} from "./base";
 import {ead} from "../math";
 
@@ -15,7 +15,7 @@ export const EquivalentAirDepth = ({state}: { state: State }) => (
             min={0}
             max={100}
             value={state.ead.depth}
-            onInput={(state: State, event: MyInputEvent) => ({
+            oninput={(state: State, event: MyInputEvent) => ({
                 ...state, ead: {...state.ead, depth: parseInt(event.target.value)}
             }) as State}
         />
@@ -26,7 +26,7 @@ export const EquivalentAirDepth = ({state}: { state: State }) => (
             max={state.settings.max_fo2}
             step={0.01}
             value={state.ead.fo2}
-            onInput={(state: State, event: MyInputEvent) => ({
+            oninput={(state: State, event: MyInputEvent) => ({
                 ...state, ead: {...state.ead, fo2: parseFloat(event.target.value)}
             } as State)}
         />

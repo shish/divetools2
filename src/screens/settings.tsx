@@ -1,4 +1,4 @@
-import {h} from "hyperapp"; // JSX will be turned into "h" by rollup
+import h from "hyperapp-jsx-pragma";
 import {O2, O2Percentage, Screen} from "./base";
 
 
@@ -21,7 +21,7 @@ const SaveButton = () => (
     <a class={"button"} onclick={saveSettings}>Save</a>
 );
 const ResetButton = () => (
-    <a class={"button"} onClick={resetSettings}>Reset</a>
+    <a class={"button"} onclick={resetSettings}>Reset</a>
 );
 
 export const Settings = ({state}: {state: State}) => (
@@ -36,7 +36,7 @@ export const Settings = ({state}: {state: State}) => (
                         max={1}
                         step={0.01}
                         value={state.settings.min_fo2}
-                        onInput={(state: State, event: MyInputEvent) => ({
+                        oninput={(state: State, event: MyInputEvent) => ({
                             ...state,
                             settings: {
                                 ...state.settings,
@@ -57,7 +57,7 @@ export const Settings = ({state}: {state: State}) => (
                         max={1}
                         step={0.01}
                         value={state.settings.max_fo2}
-                        onInput={(state: State, event: MyInputEvent) => ({
+                        oninput={(state: State, event: MyInputEvent) => ({
                             ...state,
                             settings: {
                                 ...state.settings,
@@ -78,7 +78,7 @@ export const Settings = ({state}: {state: State}) => (
                         max={10}
                         step={1}
                         value={state.settings.tank_pressure_step}
-                        onInput={(state: State, event: MyInputEvent) => ({
+                        oninput={(state: State, event: MyInputEvent) => ({
                             ...state,
                             settings: {
                                 ...state.settings,
@@ -98,7 +98,7 @@ export const Settings = ({state}: {state: State}) => (
                         max={300}
                         step={state.settings.tank_pressure_step}
                         value={state.settings.max_tank_pressure}
-                        onInput={(state: State, event: MyInputEvent) => ({
+                        oninput={(state: State, event: MyInputEvent) => ({
                             ...state,
                             settings: {
                                 ...state.settings,

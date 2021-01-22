@@ -1,4 +1,4 @@
-import {h} from "hyperapp"; // JSX will be turned into "h" by rollup
+import h from "hyperapp-jsx-pragma";
 import {Screen} from "./base";
 import dive_table from '../static/dive-table.jpg';
 import surface_interval_times from '../static/surface-interval-times.jpg';

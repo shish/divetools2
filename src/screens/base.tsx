@@ -1,4 +1,4 @@
-import {h} from "hyperapp";
+import h from "hyperapp-jsx-pragma";
 
 function nl2sp(s: string) {
     return s.replace(/\n/g, " ");

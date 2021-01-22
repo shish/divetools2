@@ -1,4 +1,4 @@
-import {h} from "hyperapp"; // JSX will be turned into "h" by rollup
+import h from "hyperapp-jsx-pragma";
 import {Screen} from "./base";
 
 

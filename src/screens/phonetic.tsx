@@ -1,4 +1,4 @@
-import {h} from "hyperapp";
+import h from "hyperapp-jsx-pragma";
 import {Screen} from "./base";
 
 
@@ -80,7 +80,7 @@ function alpha_table() {
 export const PhoneticAlphabet = ({state}: { state: State }) => (
     <Screen title={"Phonetic Alphabet"}>
         <input
-            onInput={(state: State, event: MyInputEvent) => ({
+            oninput={(state: State, event: MyInputEvent) => ({
                 ...state, phonetic: {word: event.target.value}
             } as State)}
             value={state.phonetic.word}

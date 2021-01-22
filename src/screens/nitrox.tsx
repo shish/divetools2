@@ -1,4 +1,4 @@
-import {h} from "hyperapp"; // JSX will be turned into "h" by rollup
+import h from "hyperapp-jsx-pragma";
 import {O2, O2CleanWarning, O2Percentage, Screen} from "./base";
 
 /* ================================================================= *\
@@ -29,7 +29,7 @@ const NitroxHave = ({state}: {state: State}) => (
             max={state.settings.max_tank_pressure}
             step={state.settings.tank_pressure_step}
             value={state.nitrox_blend.have_bar}
-            onInput={(state: State, event: MyInputEvent) => ({
+            oninput={(state: State, event: MyInputEvent) => ({
                 ...state,
                 nitrox_blend: {
                     ...state.nitrox_blend,
@@ -44,7 +44,7 @@ const NitroxHave = ({state}: {state: State}) => (
             max={state.settings.max_fo2}
             step={0.01}
             value={state.nitrox_blend.have_fo2}
-            onInput={(state: State, event: MyInputEvent) => ({
+            oninput={(state: State, event: MyInputEvent) => ({
                 ...state,
                 nitrox_blend: {
                     ...state.nitrox_blend,
@@ -67,7 +67,7 @@ const NitroxWant = ({state}: {state: State}) => (
             max={state.settings.max_tank_pressure}
             step={state.settings.tank_pressure_step}
             value={state.nitrox_blend.want_bar}
-            onInput={(state: State, event: MyInputEvent) => ({
+            oninput={(state: State, event: MyInputEvent) => ({
                 ...state,
                 nitrox_blend: {
                     ...state.nitrox_blend,
@@ -82,7 +82,7 @@ const NitroxWant = ({state}: {state: State}) => (
             max={state.settings.max_fo2}
             step={0.01}
             value={state.nitrox_blend.want_fo2}
-            onInput={(state: State, event: MyInputEvent) => ({
+            oninput={(state: State, event: MyInputEvent) => ({
                 ...state,
                 nitrox_blend: {
                     ...state.nitrox_blend,
@@ -102,7 +102,7 @@ const NitroxTopUp = ({state}: {state: State}) => (
             max={state.settings.max_fo2}
             step={0.01}
             value={state.nitrox_blend.topup_fo2}
-            onInput={(state: State, event: MyInputEvent) => ({
+            oninput={(state: State, event: MyInputEvent) => ({
                 ...state,
                 nitrox_blend: {
                     ...state.nitrox_blend,
