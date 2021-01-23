@@ -2,7 +2,7 @@
     "name": "divetools2",
     "dependencies": {
         "hyperapp": "^2.0.10",
-        "hyperapp-auto-history": "^1.0.7",
+        "hyperapp-auto-history": "^1.0.16",
         "hyperapp-fx": "^2.0.0-beta.2",
         "hyperapp-jsx-pragma": "^1.2.0"
     },
