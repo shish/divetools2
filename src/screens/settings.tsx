@@ -1,30 +1,31 @@
 import h from "hyperapp-jsx-pragma";
 import {O2, O2Percentage, Screen} from "./base";
-
+import { PushLocation } from "../location";
+import { default_settings } from "../divetools";
 
 /* ================================================================= *\
  * Settings
 \* ================================================================= */
 
-function saveSettings(state) {
+function saveSettings(state, event) {
+    event.preventDefault();
     window.localStorage.setItem("settings", JSON.stringify(state.settings));
-    return {...state, screen: null};
+    return [state, [PushLocation, "/"]];
 }
-function resetSettings() {
-    console.log("Removing state from localStorage");
-    window.localStorage.removeItem("settings");
-    window.location.reload();
-    return null;
+function resetSettings(state, event) {
+    event.preventDefault();
+    window.localStorage.setItem("settings", JSON.stringify(default_settings));
+    return {...state, settings: {...default_settings}};
 }
 
 const SaveButton = () => (
-    <a class={"button"} onclick={saveSettings}>Save</a>
+    <a class={"button"} onclick={saveSettings}>Back</a>
 );
 const ResetButton = () => (
     <a class={"button"} onclick={resetSettings}>Reset</a>
 );
 
-export const Settings = ({state}: {state: State}) => (
+export const Settings = (state: State) => (
     <Screen title={"Settings"} footer={[<SaveButton/>, <ResetButton />]}>
         <table className={"settings"}>
             <tr>
@@ -94,7 +95,7 @@ export const Settings = ({state}: {state: State}) => (
                 <td>
                     <input
                         type={"range"}
-                        min={0}
+                        min={100}
                         max={300}
                         step={state.settings.tank_pressure_step}
                         value={state.settings.max_tank_pressure}

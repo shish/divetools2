@@ -150,7 +150,7 @@ function get_dive_table(depth, time) {
     </div>;
 }
 
-export const Decompression = ({state}: { state: State }) => (
+export const Decompression = (state: State) => (
     <Screen title={"Decompression Stops"}>
         <p>(Assuming <O2/> at 21%, one dive per day)</p>
         <h2>Depth: {state.dive_table.depth}m</h2>

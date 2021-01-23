@@ -113,7 +113,7 @@ const NitroxTopUp = ({state}: {state: State}) => (
     </div>
 );
 
-export const ContinuousNitroxBlend = ({state}: {state: State}) => (
+export const ContinuousNitroxBlend = (state: State) => (
     <Screen title={"Continuous Blend"} notice={<O2CleanWarning fo2={Math.max(state.nitrox_blend.have_fo2, state.nitrox_blend.want_fo2) as Fraction} />}>
         <NitroxHave state={state} />
         <NitroxWant state={state} />
@@ -157,7 +157,7 @@ function o2_top_up(s): Bar {
     return Math.floor(want_ppo2 - have_ppo2 - ppo2_from_fill) as Bar;
 }
 
-export const PartialPressureNitroxBlend = ({state}: {state: State}) => (
+export const PartialPressureNitroxBlend = (state: State) => (
     <Screen title={"Partial Pressure Blend"}>
         <NitroxHave state={state} />
         <NitroxWant state={state} />

@@ -1,16 +1,8 @@
 import h from "hyperapp-jsx-pragma";
+import { AnchorHandler } from "../location";
 
-function nl2sp(s: string) {
-    return s.replace(/\n/g, " ");
-}
-export function title2hash(s: string) {
-    return s.replace(/[ \n]/g, "")
-}
-export const GoToScreen = (state, title) => [
-    {...state, screen: title ? title2hash(title) : null},
-];
 export const BackButton = () => (
-    <a className={"button"} onclick={[GoToScreen, null]}>Back</a>
+    <a className={"button"} onclick={AnchorHandler} href={"/"}>Back</a>
 );
 
 export const Screen = (
@@ -18,16 +10,18 @@ export const Screen = (
         {title: string; notice?: any; blank?: boolean; footer?: Array<any>},
     children
 ) => (
-    <main>
-        <header>
-            <h1>{title}</h1>
-        </header>
-        <article className={blank ? "blank" : null}>
-            <div style={{position: "absolute", top: 0, left: 0, right: 0}}>{notice}</div>
-            {children}
-        </article>
-        {footer ? <footer>{footer}</footer> : null}
-    </main>
+    <body>
+        <main>
+            <header>
+                <h1 onclick={function(state) {console.log(state); return state;}}>{title}</h1>
+            </header>
+            <article className={blank ? "blank" : null}>
+                <div style={{position: "absolute", top: 0, left: 0, right: 0}}>{notice}</div>
+                {children}
+            </article>
+            {footer ? <footer>{footer}</footer> : null}
+        </main>
+    </body>
 );
 
 export const O2Percentage = ({fo2}: {fo2: Fraction}) => (

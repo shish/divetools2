@@ -71,10 +71,15 @@ const StationList = ({state, stations}) => (
     )
 );
 
+function EnableGeo(state, event) {
+    event.preventDefault();
+    return {
+        ...state,
+        settings: {...state.settings, geo_enabled: true}
+    }
+}
 const EnableGeoButton = () => (
-    <a class={"button"} onclick={
-        (state) => ({...state, settings: {...state.settings, geo_enabled: true}})
-    }>Search GPS</a>
+    <a class={"button"} onclick={EnableGeo}>Search GPS</a>
 );
 
 function format_lat_lon({lat, lon}: {lat: number, lon: number}) {
@@ -130,7 +135,7 @@ const GeoSearch = ({state}: {state: State}) => (
     ]
 );
 
-export const VhfChannels = ({state}: {state: State}) => (
+export const VhfChannels = (state: State) => (
     <Screen title={"VHF Channels"} footer={[
         <BackButton/>,
         navigator.geolocation && !state.settings.geo_enabled && <EnableGeoButton />

@@ -2,7 +2,7 @@ import h from "hyperapp-jsx-pragma";
 import {O2, O2CleanWarning, O2Percentage, Screen} from "./base";
 import {depth_to_bar} from "../math";
 
-export const BestMix = ({state}: { state: State }) => (
+export const BestMix = (state: State) => (
     <Screen title={"Best Mix for Depth"}
             notice={<O2CleanWarning fo2={state.settings.max_ppo2 / depth_to_bar(state.best_mix.mod) as Fraction}/>}>
         <h2>Max Operating Depth: {state.best_mix.mod}m</h2>

@@ -77,7 +77,7 @@ function alpha_table() {
     </table>;
 }
 
-export const PhoneticAlphabet = ({state}: { state: State }) => (
+export const PhoneticAlphabet = (state: State) => (
     <Screen title={"Phonetic Alphabet"}>
         <input
             oninput={(state: State, event: MyInputEvent) => ({

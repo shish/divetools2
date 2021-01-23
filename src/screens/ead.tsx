@@ -7,7 +7,7 @@ import {ead} from "../math";
  * Equivalent Air Depth
 \* ================================================================= */
 
-export const EquivalentAirDepth = ({state}: { state: State }) => (
+export const EquivalentAirDepth = (state: State) => (
     <Screen title={"Equivalent Air Depth"}>
         <h2>Depth: {state.ead.depth}m</h2>
         <input

@@ -1,13 +1,35 @@
 /// <reference path='./divetools.d.ts'/>
-import {app} from "hyperapp";
+import {app, h, text} from "hyperapp";
 import {WatchPosition} from "hyperapp-fx";
-import {AutoHistory} from "hyperapp-auto-history";
 import {Root} from "./screens/root";
+import { WatchLocation } from "./location";
 
+// import { DiveTable, SurfaceIntervalTimes, ResidualNitrogen } from "./tables";
+import {ContinuousNitroxBlend, PartialPressureNitroxBlend} from "./screens/nitrox";
+import {VhfChannels} from "./screens/vhf";
+import {Settings} from "./screens/settings";
+import {About} from "./screens/about";
+import {EquivalentAirDepth} from "./screens/ead";
+import {MaxOperatingDepth} from "./screens/mod";
+import {BestMix} from "./screens/bestmix";
+import {Decompression} from "./screens/deco";
+import {PhoneticAlphabet} from "./screens/phonetic";
+
+
+export const default_settings = {
+    min_fo2: 0.21 as Fraction,
+    max_fo2: 0.40 as Fraction,
+    max_ppo2: 1.4 as Bar,
+    max_tank_pressure: 230 as Bar,
+    tank_pressure_step: 5,
+    max_depth: 56 as Meters,
+    max_time: 60 as Minutes,
+    geo_enabled: false,
+};
 
 let state: State = {
     // global app bits
-    screen: null,
+    path: window.location.pathname,
 
     mod: {
         fo2: 0.32 as Fraction,
@@ -49,14 +71,7 @@ let state: State = {
     },
 
     settings: {
-        min_fo2: 0.21 as Fraction,
-        max_fo2: 0.40 as Fraction,
-        max_ppo2: 1.4 as Bar,
-        max_tank_pressure: 230 as Bar,
-        tank_pressure_step: 5,
-        max_depth: 56 as Meters,
-        max_time: 60 as Minutes,
-        geo_enabled: false,
+        ...default_settings
     }
 };
 
@@ -75,6 +90,10 @@ catch(err) {
 // Base Subscriptions
 // ===========================================================================
 
+const LocationWatcher = WatchLocation({
+  action: (state, location) => ({ ...state, path: location }),
+});
+
 const PositionWatcher = WatchPosition({
     action: (state: State, position) => ({
         ...state,
@@ -88,23 +107,27 @@ const PositionWatcher = WatchPosition({
     }),
 });
 
-const HistoryManager = AutoHistory({
-    init: state,
-    push: ["screen"],
-    replace: []
-});
-
-function subscriptions(state) {
-    HistoryManager.push_state_if_changed(state);
-    return [
-        HistoryManager,
-        state.settings.geo_enabled && PositionWatcher
-    ];
+function view(state) {
+    let routes = {
+        "/": Root,
+        "/decompression": Decompression,
+        "/ead": EquivalentAirDepth,
+        "/mod": MaxOperatingDepth,
+        "/bestmix": BestMix,
+        "/contblend": ContinuousNitroxBlend,
+        "/ppblend": PartialPressureNitroxBlend,
+        "/vhf": VhfChannels,
+        "/phonetic": PhoneticAlphabet,
+        "/settings": Settings,
+        "/about": About,
+        "404": () => h("body", {}, text("404")),
+    };
+    return (routes[state.path] ?? routes["404"])(state);
 }
 
 app({
     init: state,
-    view: Root,
-    subscriptions: subscriptions,
+    view: view,
+    subscriptions: state => [LocationWatcher, state.settings.geo_enabled && PositionWatcher],
     node: document.body
 });

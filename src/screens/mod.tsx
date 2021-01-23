@@ -2,7 +2,7 @@ import h from "hyperapp-jsx-pragma";
 import {O2, O2CleanWarning, O2Percentage, Screen} from "./base";
 
 
-export const MaxOperatingDepth = ({state}: { state: State }) => (
+export const MaxOperatingDepth = (state: State) => (
     <Screen title={"Max Operating Depth"} notice={<O2CleanWarning fo2={state.mod.fo2}/>}>
         <h2>
             EAN <O2/> Level: <O2Percentage fo2={state.mod.fo2}/>
