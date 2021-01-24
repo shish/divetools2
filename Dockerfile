@@ -11,4 +11,4 @@ RUN npm install
 # Build app
 COPY . /app
 RUN npm run build
-CMD ./node_modules/.bin/parcel serve --no-hmr --port 80
+CMD ./node_modules/.bin/parcel serve src/index.html --no-hmr --port 80
