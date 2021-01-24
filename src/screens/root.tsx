@@ -1,6 +1,5 @@
 import h from "hyperapp-jsx-pragma";
 import { Screen } from "./base";
-import { AnchorHandler } from "../location";
 
 
 const Section = ({title}, children) => (
@@ -9,8 +8,9 @@ const Section = ({title}, children) => (
         <section>{children}</section>
     </div>
 );
+
 const Link = ({href}, children) => (
-    <a class={"button"} onclick={AnchorHandler} href={href}><div>{children}</div></a>
+    <a class={"button"} href={href}><div>{children}</div></a>
 );
 
 export function Root(state: State) {

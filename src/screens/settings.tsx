@@ -1,6 +1,5 @@
 import h from "hyperapp-jsx-pragma";
 import {O2, O2Percentage, Screen} from "./base";
-import { PushLocation } from "../location";
 import { default_settings } from "../divetools";
 
 /* ================================================================= *\
@@ -10,7 +9,7 @@ import { default_settings } from "../divetools";
 function saveSettings(state, event) {
     event.preventDefault();
     window.localStorage.setItem("settings", JSON.stringify(state.settings));
-    return [state, [PushLocation, "/"]];
+    return state;
 }
 function resetSettings(state, event) {
     event.preventDefault();
@@ -19,7 +18,7 @@ function resetSettings(state, event) {
 }
 
 const SaveButton = () => (
-    <a class={"button"} onclick={saveSettings}>Back</a>
+    <a class={"button"} onclick={saveSettings} href={"/"}>Back</a>
 );
 const ResetButton = () => (
     <a class={"button"} onclick={resetSettings}>Reset</a>

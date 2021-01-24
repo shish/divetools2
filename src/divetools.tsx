@@ -1,8 +1,8 @@
 /// <reference path='./divetools.d.ts'/>
 import {app, h, text} from "hyperapp";
 import {WatchPosition} from "hyperapp-fx";
+import {onUrlChange, onUrlRequest, pushUrl} from "./navigation";
 import {Root} from "./screens/root";
-import { WatchLocation } from "./location";
 
 // import { DiveTable, SurfaceIntervalTimes, ResidualNitrogen } from "./tables";
 import {ContinuousNitroxBlend, PartialPressureNitroxBlend} from "./screens/nitrox";
@@ -29,7 +29,7 @@ export const default_settings = {
 
 let state: State = {
     // global app bits
-    path: window.location.pathname,
+    url: window.location,
 
     mod: {
         fo2: 0.32 as Fraction,
@@ -85,15 +85,6 @@ catch(err) {
     console.log("Error loading state:", err);
 }
 
-
-// ===========================================================================
-// Base Subscriptions
-// ===========================================================================
-
-const LocationWatcher = WatchLocation({
-  action: (state, location) => ({ ...state, path: location }),
-});
-
 const PositionWatcher = WatchPosition({
     action: (state: State, position) => ({
         ...state,
@@ -107,27 +98,28 @@ const PositionWatcher = WatchPosition({
     }),
 });
 
-function view(state) {
-    let routes = {
-        "/": Root,
-        "/decompression": Decompression,
-        "/ead": EquivalentAirDepth,
-        "/mod": MaxOperatingDepth,
-        "/bestmix": BestMix,
-        "/contblend": ContinuousNitroxBlend,
-        "/ppblend": PartialPressureNitroxBlend,
-        "/vhf": VhfChannels,
-        "/phonetic": PhoneticAlphabet,
-        "/settings": Settings,
-        "/about": About,
-        "404": () => h("body", {}, text("404")),
-    };
-    return (routes[state.path] ?? routes["404"])(state);
-}
+const routes = {
+    "/": Root,
+    "/decompression": Decompression,
+    "/ead": EquivalentAirDepth,
+    "/mod": MaxOperatingDepth,
+    "/bestmix": BestMix,
+    "/contblend": ContinuousNitroxBlend,
+    "/ppblend": PartialPressureNitroxBlend,
+    "/vhf": VhfChannels,
+    "/phonetic": PhoneticAlphabet,
+    "/settings": Settings,
+    "/about": About,
+    "404": () => h("body", {onclick: function(state) {console.log(state); return state;}}, text("404")),
+};
 
 app({
     init: state,
-    view: view,
-    subscriptions: state => [LocationWatcher, state.settings.geo_enabled && PositionWatcher],
+    view: (state) => (routes[state.url.pathname] ?? routes["404"])(state),
+    subscriptions: state => [
+        onUrlChange((state, url) => ({ ...state, url: url })),
+        onUrlRequest((state, location) => [state, pushUrl(location.pathname)]),
+        state.settings.geo_enabled && PositionWatcher
+    ],
     node: document.body
 });

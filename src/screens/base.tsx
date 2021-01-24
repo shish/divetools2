@@ -1,8 +1,7 @@
 import h from "hyperapp-jsx-pragma";
-import { AnchorHandler } from "../location";
 
 export const BackButton = () => (
-    <a className={"button"} onclick={AnchorHandler} href={"/"}>Back</a>
+    <a class={"button"} href={"/"}>Back</a>
 );
 
 export const Screen = (
@@ -15,7 +14,7 @@ export const Screen = (
             <header>
                 <h1 onclick={function(state) {console.log(state); return state;}}>{title}</h1>
             </header>
-            <article className={blank ? "blank" : null}>
+            <article class={blank ? "blank" : null}>
                 <div style={{position: "absolute", top: 0, left: 0, right: 0}}>{notice}</div>
                 {children}
             </article>
@@ -25,7 +24,7 @@ export const Screen = (
 );
 
 export const O2Percentage = ({fo2}: {fo2: Fraction}) => (
-    <span className={fo2 > 1.0 ? "error" : (fo2 > 0.4 ? "warning" : "ok")}>{Math.round(fo2 * 100)}%</span>
+    <span class={fo2 > 1.0 ? "error" : (fo2 > 0.4 ? "warning" : "ok")}>{Math.round(fo2 * 100)}%</span>
 );
 
 export const O2CleanWarning = ({fo2}: {fo2: Fraction}) => (
