@@ -38,7 +38,7 @@ export const onUrlRequest = fx(
         target
       ) {
         const href = target.getAttribute("href")
-        if (!href.includes("://")) {
+        if (!href.match(/^(http:|https:|mailto:|\/\/)/)) {
           event.preventDefault()
           dispatch(action, { pathname: href })  
         }
