@@ -224,3 +224,23 @@ $DARK_FG: #DDD;
   }
 }
 */
+
+///////////////////////////////////////////////////////////////////////
+// Don't put stuff in iPhone's weird rounded corners
+
+MAIN {
+  HEADER {
+    padding-top: env(safe-area-inset-top);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  ARTICLE {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  FOOTER {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
