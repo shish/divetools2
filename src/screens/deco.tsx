@@ -1,6 +1,8 @@
 import h from "hyperapp-jsx-pragma";
 import {O2, Screen} from "./base";
 
+type DepthGroup = [number, number, number, string];
+
 const DIVE_TABLE = {
     12: {
         19: [0, 0, 0, "A"],
@@ -118,15 +120,16 @@ const DIVE_TABLE = {
     },
 };
 
-function get_depth_group(depth) {
+function get_depth_group(depth: number): string {
     for (let d in DIVE_TABLE) {
         if (parseInt(d) >= depth) {
             return d;
         }
     }
+    throw new Error("No depth group for " + depth);
 }
 
-function get_time_group(depth_group, time) {
+function get_time_group(depth_group: DepthGroup, time: number) {
     for (let t in depth_group) {
         if (parseInt(t) >= time) {
             return t;
@@ -135,7 +138,7 @@ function get_time_group(depth_group, time) {
     return [];
 }
 
-function get_dive_table(depth, time) {
+function get_dive_table(depth: number, time: number) {
     let depth_group = DIVE_TABLE[get_depth_group(depth)];
     if (!depth_group) return <div>Tables don't go this deep</div>;
 

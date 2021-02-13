@@ -10,8 +10,15 @@ function intersect(a, b) {
 }
 
 // https://en.wikipedia.org/wiki/Marine_VHF_radio
-const DUPLEX = [];  // 83, TODO: complete list?
+const DUPLEX: number[] = [];  // 83, TODO: complete list?
 // const VHF_RANGE = 35;  // "30-40 miles"
+
+type Station = {
+    name: string,
+    channels: Array<number>,
+    standard: boolean,
+    coords?: {lat: number, lon: number},
+};
 
 const STATIONS = [
     // Standard Channels
@@ -55,16 +62,16 @@ const STATIONS_WITH_COORDS = STATIONS.filter((x) => (x.coords));
 
 const StationList = ({state, stations}) => (
     stations.map(
-        (x) => (
+        (station: Station) => (
             <tr>
-                <td>{x.channels.map(
-                    (x) => (DUPLEX.indexOf(x) !== -1) ? <span class={"duplex channel"}>{x}</span> : <span class={"simplex channel"}>{x}</span>)
+                <td>{station.channels.map(
+                    (ch: number) => DUPLEX.includes(ch) ? <span class={"duplex channel"}>{ch}</span> : <span class={"simplex channel"}>{ch}</span>)
                 }</td>
                 <td>-</td>
                 <td>
-                    {x.name}
-                    {x.coords && state.location.lon &&
-                        " (" + getDistanceFromLatLoninKm(x.coords, state.location).toFixed(1) + "km)"
+                    {station.name}
+                    {station.coords && state.location.lon &&
+                        " (" + getDistanceFromLatLoninKm(station.coords, state.location).toFixed(1) + "km)"
                     }
                 </td>
             </tr>)
@@ -123,7 +130,7 @@ function sort_by_distance(channels, position) {
 const GeoSearch = ({state}: {state: State}) => (
     [
         <tr><td colspan={3}>&nbsp;</td></tr>,
-        (state.location.lat && state.location.lon) ?
+        state.location ?
             [
                 <tr><th colspan={3}>
                     Channels Near {format_lat_lon(state.location)}:
@@ -157,7 +164,7 @@ export const VhfChannels = (state: State) => (
                 <tbody>
                     <tr><th colspan={3}>Standard Channels:</th></tr>
                     <StationList state={state} stations={STATIONS.filter((x) => (x.standard))} />
-                    {state.location.lat && state.location.lon && <GeoSearch state={state} />}
+                    {state.location && <GeoSearch state={state} />}
                 </tbody>
             }
         </table>

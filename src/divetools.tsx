@@ -56,10 +56,7 @@ let state: State = {
         search: "",
     },
 
-    location: {
-        lat: null,
-        lon: null,
-    },
+    location: null,
 
     phonetic: {
         word: "",

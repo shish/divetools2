@@ -45,8 +45,8 @@ function word_to_phonetic(word: string): string {
 }
 
 function alpha_table() {
-    let c1 = [];
-    let c2 = [];
+    let c1: any[] = [];
+    let c2: any[] = [];
     let n = 0;
     for (let k in ALPHABET) {
         if (k === ' ') continue;

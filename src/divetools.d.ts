@@ -37,7 +37,7 @@ type State = {
         search: string,
     },
 
-    location: {
+    location: null | {
         lat: number,
         lon: number,
     },
