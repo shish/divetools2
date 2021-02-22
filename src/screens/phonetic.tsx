@@ -39,7 +39,7 @@ const ALPHABET = {
 function word_to_phonetic(word: string): string {
     let words = "";
     for (let i = 0; i < word.length; i++) {
-        words += ALPHABET[word[i].toLowerCase()] + " ";
+        words += (ALPHABET[word[i].toLowerCase()] || "("+word[i]+"?)") + " ";
     }
     return words;
 }
