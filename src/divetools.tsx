@@ -1,7 +1,7 @@
 /// <reference path='./divetools.d.ts'/>
 import {app, h, text} from "hyperapp";
 import {WatchPosition} from "hyperapp-fx";
-import {onUrlChange, onUrlRequest, pushUrl} from "./navigation";
+import {onUrlChange, onUrlRequest, pushUrl} from "@shish2k/hyperapp-navigation";
 import {Root} from "./screens/root";
 
 // import { DiveTable, SurfaceIntervalTimes, ResidualNitrogen } from "./tables";
