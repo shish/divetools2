@@ -1,18 +1,25 @@
 {
     "name": "divetools2",
     "dependencies": {
-        "@shish2k/hyperapp-navigation": "^1.0.0",
+        "@shish2k/hyperapp-navigation": "^1.0.1",
         "hyperapp": "^2.0.22",
         "hyperapp-fx": "^2.0.0-beta.2",
         "hyperapp-jsx-pragma": "^1.3.0"
     },
+    "repository": "https://github.com/shish/divetools2/",
+    "license": "GPL-3.0-only",
     "scripts": {
         "build": "parcel build --public-url . src/index.html",
         "watch": "parcel watch --public-url . src/index.html",
         "serve": "parcel serve --port 1236 src/index.html"
     },
-    "repository": "https://github.com/shish/divetools2/",
-    "license": "GPL-3.0-only",
+    "devDependencies": {
+        "@parcel/packager-raw-url": "^2.8.0",
+        "@parcel/packager-xml": "^2.8.0",
+        "@parcel/transformer-sass": "^2.8.0",
+        "parcel": "^2.8.0",
+        "parcel-config-pwa-manifest": "^0.1.2"
+    },
     "pwaManifest": {
         "name": "DiveTools",
         "shortName": "DiveTools",
@@ -30,12 +37,5 @@
             ],
             "genFavicons": true
         }
-    },
-    "devDependencies": {
-        "@parcel/packager-raw-url": "^2.7.0",
-        "@parcel/packager-xml": "^2.7.0",
-        "@parcel/transformer-sass": "^2.7.0",
-        "parcel": "^2.7.0",
-        "parcel-config-pwa-manifest": "^0.1.2"
     }
 }
