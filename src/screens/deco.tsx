@@ -1,5 +1,5 @@
 import h from "hyperapp-jsx-pragma";
-import {O2, Screen} from "./base";
+import { O2, Screen } from "./base";
 
 type DepthGroup = [number, number, number, string];
 
@@ -145,17 +145,25 @@ function get_dive_table(depth: number, time: number) {
     let time_group = depth_group[get_time_group(depth_group, time)];
     if (!time_group) return <div>Tables don't go this long</div>;
 
-    return <div>
-        {time_group[0] > 0 && <div>9m stop: {time_group[0]}min</div>}
-        {time_group[1] > 0 && <div>6m stop: {time_group[1]}min</div>}
-        {time_group[2] > 0 ? <div>3m stop: {time_group[2]}min</div> : <div>3m safety stop: 3min</div>}
-        <div>Repetitive Group: {time_group[3]}</div>
-    </div>;
+    return (
+        <div>
+            {time_group[0] > 0 && <div>9m stop: {time_group[0]}min</div>}
+            {time_group[1] > 0 && <div>6m stop: {time_group[1]}min</div>}
+            {time_group[2] > 0 ? (
+                <div>3m stop: {time_group[2]}min</div>
+            ) : (
+                <div>3m safety stop: 3min</div>
+            )}
+            <div>Repetitive Group: {time_group[3]}</div>
+        </div>
+    );
 }
 
 export const Decompression = (state: State) => (
     <Screen title={"Decompression Stops"}>
-        <p>(Assuming <O2/> at 21%, one dive per day)</p>
+        <p>
+            (Assuming <O2 /> at 21%, one dive per day)
+        </p>
         <h2>Depth: {state.dive_table.depth}m</h2>
         <input
             type={"range"}
@@ -163,13 +171,15 @@ export const Decompression = (state: State) => (
             max={state.settings.max_depth}
             step={1}
             value={state.dive_table.depth}
-            oninput={(state: State, event: MyInputEvent) => ({
-                ...state,
-                dive_table: {
-                    ...state.dive_table,
-                    depth: parseInt(event.target.value),
-                }
-            } as State)}
+            oninput={(state: State, event: MyInputEvent) =>
+                ({
+                    ...state,
+                    dive_table: {
+                        ...state.dive_table,
+                        depth: parseInt(event.target.value),
+                    },
+                } as State)
+            }
         />
         <h2>Time: {state.dive_table.time}min</h2>
         <input
@@ -178,13 +188,15 @@ export const Decompression = (state: State) => (
             max={state.settings.max_time}
             step={1}
             value={state.dive_table.time}
-            oninput={(state: State, event: MyInputEvent) => ({
-                ...state,
-                dive_table: {
-                    ...state.dive_table,
-                    time: parseInt(event.target.value),
-                }
-            } as State)}
+            oninput={(state: State, event: MyInputEvent) =>
+                ({
+                    ...state,
+                    dive_table: {
+                        ...state.dive_table,
+                        time: parseInt(event.target.value),
+                    },
+                } as State)
+            }
         />
         {get_dive_table(state.dive_table.depth, state.dive_table.time)}
     </Screen>

@@ -1,24 +1,30 @@
 /// <reference path='./divetools.d.ts'/>
-import {app, h, text} from "hyperapp";
-import {WatchPosition} from "hyperapp-fx";
-import {onUrlChange, onUrlRequest, pushUrl} from "@shish2k/hyperapp-navigation";
-import {Root} from "./screens/root";
+import { app, h, text } from "hyperapp";
+import { WatchPosition } from "hyperapp-fx";
+import {
+    onUrlChange,
+    onUrlRequest,
+    pushUrl,
+} from "@shish2k/hyperapp-navigation";
+import { Root } from "./screens/root";
 
 // import { DiveTable, SurfaceIntervalTimes, ResidualNitrogen } from "./tables";
-import {ContinuousNitroxBlend, PartialPressureNitroxBlend} from "./screens/nitrox";
-import {VhfChannels} from "./screens/vhf";
-import {Settings} from "./screens/settings";
-import {About} from "./screens/about";
-import {EquivalentAirDepth} from "./screens/ead";
-import {MaxOperatingDepth} from "./screens/mod";
-import {BestMix} from "./screens/bestmix";
-import {Decompression} from "./screens/deco";
-import {PhoneticAlphabet} from "./screens/phonetic";
-
+import {
+    ContinuousNitroxBlend,
+    PartialPressureNitroxBlend,
+} from "./screens/nitrox";
+import { VhfChannels } from "./screens/vhf";
+import { Settings } from "./screens/settings";
+import { About } from "./screens/about";
+import { EquivalentAirDepth } from "./screens/ead";
+import { MaxOperatingDepth } from "./screens/mod";
+import { BestMix } from "./screens/bestmix";
+import { Decompression } from "./screens/deco";
+import { PhoneticAlphabet } from "./screens/phonetic";
 
 export const default_settings = {
     min_fo2: 0.21 as Fraction,
-    max_fo2: 0.40 as Fraction,
+    max_fo2: 0.4 as Fraction,
     max_ppo2: 1.4 as Bar,
     max_tank_pressure: 230 as Bar,
     tank_pressure_step: 5,
@@ -42,7 +48,7 @@ let state: State = {
         have_bar: 20 as Bar,
         have_fo2: 0.33 as Fraction,
         want_bar: 100 as Bar,
-        want_fo2: 0.40 as Fraction,
+        want_fo2: 0.4 as Fraction,
         topup_fo2: 0.33 as Fraction,
     },
 
@@ -68,17 +74,16 @@ let state: State = {
     },
 
     settings: {
-        ...default_settings
-    }
+        ...default_settings,
+    },
 };
 
 try {
     state.settings = {
         ...state.settings,
-        ...JSON.parse(window.localStorage.getItem("settings") || "{}")
+        ...JSON.parse(window.localStorage.getItem("settings") || "{}"),
     };
-}
-catch(err) {
+} catch (err) {
     console.log("Error loading state:", err);
 }
 
@@ -88,10 +93,11 @@ const PositionWatcher = WatchPosition({
         location: {
             lat: position.coords.latitude,
             lon: position.coords.longitude,
-        }
+        },
     }),
     error: (state: State, error) => ({
-        ...state, settings: {...state.settings, geo_enabled: false}
+        ...state,
+        settings: { ...state.settings, geo_enabled: false },
     }),
 });
 
@@ -107,16 +113,26 @@ const routes = {
     "/phonetic": PhoneticAlphabet,
     "/settings": Settings,
     "/about": About,
-    "404": () => h("body", {onclick: function(state) {console.log(state); return state;}}, text("404")),
+    "404": () =>
+        h(
+            "body",
+            {
+                onclick: function (state) {
+                    console.log(state);
+                    return state;
+                },
+            },
+            text("404"),
+        ),
 };
 
 app({
     init: state,
     view: (state) => (routes[state.url.pathname] ?? routes["404"])(state),
-    subscriptions: state => [
+    subscriptions: (state) => [
         onUrlChange((state, url) => ({ ...state, url: url })),
         onUrlRequest((state, location) => [state, pushUrl(location.pathname)]),
-        state.settings.geo_enabled && PositionWatcher
+        state.settings.geo_enabled && PositionWatcher,
     ],
-    node: document.body
+    node: document.body,
 });

@@ -1,8 +1,8 @@
 import h from "hyperapp-jsx-pragma";
-import {Screen} from "./base";
-import dive_table from '../static/dive-table.jpg';
-import surface_interval_times from '../static/surface-interval-times.jpg';
-import residual_nitrogen_times from '../static/residual-nitrogen-times.jpg';
+import { Screen } from "./base";
+import dive_table from "../static/dive-table.jpg";
+import surface_interval_times from "../static/surface-interval-times.jpg";
+import residual_nitrogen_times from "../static/residual-nitrogen-times.jpg";
 // import repetitive_dive_table from '../static/repetitive-dive-table.jpg';
 
 export const DiveTable = () => (

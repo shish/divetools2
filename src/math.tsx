@@ -1,5 +1,5 @@
 export function depth_to_bar(m: Meters): Bar {
-    return ((m / 10) + 1) as Bar;
+    return (m / 10 + 1) as Bar;
 }
 
 export function bar_to_depth(b: Bar): Meters {
