@@ -176,7 +176,7 @@ export const Decompression = (state: State) => (
                     ...state,
                     dive_table: {
                         ...state.dive_table,
-                        depth: parseInt(event.target.value),
+                        depth: event.target.valueAsNumber,
                     },
                 } as State)
             }
@@ -193,7 +193,7 @@ export const Decompression = (state: State) => (
                     ...state,
                     dive_table: {
                         ...state.dive_table,
-                        time: parseInt(event.target.value),
+                        time: event.target.valueAsNumber,
                     },
                 } as State)
             }

@@ -47,10 +47,10 @@ export const Settings = (state: State) => (
                                 ...state,
                                 settings: {
                                     ...state.settings,
-                                    min_fo2: parseFloat(event.target.value),
+                                    min_fo2: event.target.valueAsNumber,
                                     max_fo2: Math.max(
                                         state.settings.max_fo2,
-                                        parseFloat(event.target.value),
+                                        event.target.valueAsNumber,
                                     ),
                                 },
                             } as State)
@@ -77,10 +77,10 @@ export const Settings = (state: State) => (
                                 ...state,
                                 settings: {
                                     ...state.settings,
-                                    max_fo2: parseFloat(event.target.value),
+                                    max_fo2: event.target.valueAsNumber,
                                     min_fo2: Math.min(
                                         state.settings.min_fo2,
-                                        parseFloat(event.target.value),
+                                        event.target.valueAsNumber,
                                     ),
                                 },
                             } as State)
@@ -164,7 +164,7 @@ export const Settings = (state: State) => (
                                 ...state,
                                 settings: {
                                     ...state.settings,
-                                    max_ppo2: parseFloat(event.target.value),
+                                    max_ppo2: event.target.valueAsNumber,
                                 },
                             } as State)
                         }
@@ -186,7 +186,7 @@ export const Settings = (state: State) => (
                                 ...state,
                                 settings: {
                                     ...state.settings,
-                                    max_depth: parseInt(event.target.value),
+                                    max_depth: event.target.valueAsNumber,
                                 },
                             } as State)
                         }
@@ -208,7 +208,7 @@ export const Settings = (state: State) => (
                                 ...state,
                                 settings: {
                                     ...state.settings,
-                                    max_time: parseInt(event.target.value),
+                                    max_time: event.target.valueAsNumber,
                                 },
                             } as State)
                         }

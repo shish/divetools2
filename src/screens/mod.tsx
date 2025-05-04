@@ -19,7 +19,7 @@ export const MaxOperatingDepth = (state: State) => (
             oninput={(state: State, event: MyInputEvent) =>
                 ({
                     ...state,
-                    mod: { fo2: parseFloat(event.target.value) },
+                    mod: { fo2: event.target.valueAsNumber },
                 } as State)
             }
         />

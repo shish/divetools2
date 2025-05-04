@@ -39,10 +39,10 @@ const NitroxHave = ({ state }: { state: State }) => (
                     ...state,
                     nitrox_blend: {
                         ...state.nitrox_blend,
-                        have_bar: parseInt(event.target.value),
+                        have_bar: event.target.valueAsNumber,
                         want_bar: Math.max(
                             state.nitrox_blend.want_bar,
-                            parseInt(event.target.value),
+                            event.target.valueAsNumber,
                         ),
                     },
                 } as State)
@@ -59,7 +59,7 @@ const NitroxHave = ({ state }: { state: State }) => (
                     ...state,
                     nitrox_blend: {
                         ...state.nitrox_blend,
-                        have_fo2: parseFloat(event.target.value),
+                        have_fo2: event.target.valueAsNumber,
                     },
                 } as State)
             }
@@ -84,10 +84,10 @@ const NitroxWant = ({ state }: { state: State }) => (
                     ...state,
                     nitrox_blend: {
                         ...state.nitrox_blend,
-                        want_bar: parseInt(event.target.value),
+                        want_bar: event.target.valueAsNumber,
                         have_bar: Math.min(
                             state.nitrox_blend.have_bar,
-                            parseInt(event.target.value),
+                            event.target.valueAsNumber,
                         ),
                     },
                 } as State)
@@ -104,7 +104,7 @@ const NitroxWant = ({ state }: { state: State }) => (
                     ...state,
                     nitrox_blend: {
                         ...state.nitrox_blend,
-                        want_fo2: parseFloat(event.target.value),
+                        want_fo2: event.target.valueAsNumber,
                     },
                 } as State)
             }
@@ -129,7 +129,7 @@ const NitroxTopUp = ({ state }: { state: State }) => (
                     ...state,
                     nitrox_blend: {
                         ...state.nitrox_blend,
-                        topup_fo2: parseFloat(event.target.value),
+                        topup_fo2: event.target.valueAsNumber,
                     },
                 } as State)
             }

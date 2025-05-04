@@ -2,7 +2,7 @@ declare module "*.jpg";
 declare module "hyperapp";
 
 type MyInputEvent = {
-    target: HTMLTextAreaElement;
+    target: HTMLInputElement;
 };
 
 type Bar = number & { __bar__: void };

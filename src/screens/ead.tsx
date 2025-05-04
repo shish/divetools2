@@ -17,7 +17,7 @@ export const EquivalentAirDepth = (state: State) => (
             oninput={(state: State, event: MyInputEvent) =>
                 ({
                     ...state,
-                    ead: { ...state.ead, depth: parseInt(event.target.value) },
+                    ead: { ...state.ead, depth: event.target.valueAsNumber },
                 } as State)
             }
         />
@@ -33,7 +33,7 @@ export const EquivalentAirDepth = (state: State) => (
             oninput={(state: State, event: MyInputEvent) =>
                 ({
                     ...state,
-                    ead: { ...state.ead, fo2: parseFloat(event.target.value) },
+                    ead: { ...state.ead, fo2: event.target.valueAsNumber },
                 } as State)
             }
         />

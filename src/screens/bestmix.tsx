@@ -23,7 +23,7 @@ export const BestMix = (state: State) => (
             oninput={(state: State, event: MyInputEvent) =>
                 ({
                     ...state,
-                    best_mix: { mod: parseInt(event.target.value) },
+                    best_mix: { mod: event.target.valueAsNumber },
                 } as State)
             }
         />
