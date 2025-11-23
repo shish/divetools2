@@ -20,7 +20,7 @@ export const MaxOperatingDepth = (state: State) => (
                 ({
                     ...state,
                     mod: { fo2: event.target.valueAsNumber },
-                } as State)
+                }) as State
             }
         />
         <h2>

@@ -1,6 +1,6 @@
 import h from "hyperapp-jsx-pragma";
-import { O2, O2Percentage, Screen } from "./base";
 import { default_settings } from "../divetools";
+import { O2, O2Percentage, Screen } from "./base";
 
 /* ================================================================= *\
  * Settings
@@ -53,7 +53,7 @@ export const Settings = (state: State) => (
                                         event.target.valueAsNumber,
                                     ),
                                 },
-                            } as State)
+                            }) as State
                         }
                     />
                 </td>
@@ -83,7 +83,7 @@ export const Settings = (state: State) => (
                                         event.target.valueAsNumber,
                                     ),
                                 },
-                            } as State)
+                            }) as State
                         }
                     />
                 </td>
@@ -113,7 +113,7 @@ export const Settings = (state: State) => (
                                         event.target.value,
                                     ),
                                 },
-                            } as State)
+                            }) as State
                         }
                     />
                 </td>
@@ -141,7 +141,7 @@ export const Settings = (state: State) => (
                                         event.target.value,
                                     ),
                                 },
-                            } as State)
+                            }) as State
                         }
                     />
                 </td>
@@ -166,7 +166,7 @@ export const Settings = (state: State) => (
                                     ...state.settings,
                                     max_ppo2: event.target.valueAsNumber,
                                 },
-                            } as State)
+                            }) as State
                         }
                     />
                 </td>
@@ -188,7 +188,7 @@ export const Settings = (state: State) => (
                                     ...state.settings,
                                     max_depth: event.target.valueAsNumber,
                                 },
-                            } as State)
+                            }) as State
                         }
                     />
                 </td>
@@ -210,7 +210,7 @@ export const Settings = (state: State) => (
                                     ...state.settings,
                                     max_time: event.target.valueAsNumber,
                                 },
-                            } as State)
+                            }) as State
                         }
                     />
                 </td>

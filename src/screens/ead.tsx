@@ -1,6 +1,6 @@
 import h from "hyperapp-jsx-pragma";
-import { O2, O2Percentage, Screen } from "./base";
 import { ead } from "../math";
+import { O2, O2Percentage, Screen } from "./base";
 
 /* ================================================================= *\
  * Equivalent Air Depth
@@ -18,7 +18,7 @@ export const EquivalentAirDepth = (state: State) => (
                 ({
                     ...state,
                     ead: { ...state.ead, depth: event.target.valueAsNumber },
-                } as State)
+                }) as State
             }
         />
         <h2>
@@ -34,7 +34,7 @@ export const EquivalentAirDepth = (state: State) => (
                 ({
                     ...state,
                     ead: { ...state.ead, fo2: event.target.valueAsNumber },
-                } as State)
+                }) as State
             }
         />
         <h2>

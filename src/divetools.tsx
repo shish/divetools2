@@ -1,26 +1,26 @@
 /// <reference path='./divetools.d.ts'/>
-import { app, h, text } from "hyperapp";
-import { WatchPosition } from "hyperapp-fx";
 import {
     onUrlChange,
     onUrlRequest,
     pushUrl,
 } from "@shish2k/hyperapp-navigation";
+import { app, h, text } from "hyperapp";
+import { WatchPosition } from "hyperapp-fx";
 import { Root } from "./screens/root";
 
 // import { DiveTable, SurfaceIntervalTimes, ResidualNitrogen } from "./tables";
+import { About } from "./screens/about";
+import { BestMix } from "./screens/bestmix";
+import { Decompression } from "./screens/deco";
+import { EquivalentAirDepth } from "./screens/ead";
+import { MaxOperatingDepth } from "./screens/mod";
 import {
     ContinuousNitroxBlend,
     PartialPressureNitroxBlend,
 } from "./screens/nitrox";
-import { VhfChannels } from "./screens/vhf";
-import { Settings } from "./screens/settings";
-import { About } from "./screens/about";
-import { EquivalentAirDepth } from "./screens/ead";
-import { MaxOperatingDepth } from "./screens/mod";
-import { BestMix } from "./screens/bestmix";
-import { Decompression } from "./screens/deco";
 import { PhoneticAlphabet } from "./screens/phonetic";
+import { Settings } from "./screens/settings";
+import { VhfChannels } from "./screens/vhf";
 
 export const default_settings = {
     min_fo2: 0.21 as Fraction,

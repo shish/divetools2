@@ -90,7 +90,7 @@ export const PhoneticAlphabet = (state: State) => (
                 ({
                     ...state,
                     phonetic: { word: event.target.value },
-                } as State)
+                }) as State
             }
             value={state.phonetic.word}
             placeholder={"Enter text to translate"}

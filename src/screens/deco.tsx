@@ -178,7 +178,7 @@ export const Decompression = (state: State) => (
                         ...state.dive_table,
                         depth: event.target.valueAsNumber,
                     },
-                } as State)
+                }) as State
             }
         />
         <h2>Time: {state.dive_table.time}min</h2>
@@ -195,7 +195,7 @@ export const Decompression = (state: State) => (
                         ...state.dive_table,
                         time: event.target.valueAsNumber,
                     },
-                } as State)
+                }) as State
             }
         />
         {get_dive_table(state.dive_table.depth, state.dive_table.time)}

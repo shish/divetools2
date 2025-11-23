@@ -45,7 +45,7 @@ const NitroxHave = ({ state }: { state: State }) => (
                             event.target.valueAsNumber,
                         ),
                     },
-                } as State)
+                }) as State
             }
         />
         <input
@@ -61,7 +61,7 @@ const NitroxHave = ({ state }: { state: State }) => (
                         ...state.nitrox_blend,
                         have_fo2: event.target.valueAsNumber,
                     },
-                } as State)
+                }) as State
             }
         />
     </div>
@@ -90,7 +90,7 @@ const NitroxWant = ({ state }: { state: State }) => (
                             event.target.valueAsNumber,
                         ),
                     },
-                } as State)
+                }) as State
             }
         />
         <input
@@ -106,7 +106,7 @@ const NitroxWant = ({ state }: { state: State }) => (
                         ...state.nitrox_blend,
                         want_fo2: event.target.valueAsNumber,
                     },
-                } as State)
+                }) as State
             }
         />
     </div>
@@ -131,7 +131,7 @@ const NitroxTopUp = ({ state }: { state: State }) => (
                         ...state.nitrox_blend,
                         topup_fo2: event.target.valueAsNumber,
                     },
-                } as State)
+                }) as State
             }
         />
     </div>

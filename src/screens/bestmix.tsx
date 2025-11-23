@@ -1,6 +1,6 @@
 import h from "hyperapp-jsx-pragma";
-import { O2, O2CleanWarning, O2Percentage, Screen } from "./base";
 import { depth_to_bar } from "../math";
+import { O2, O2CleanWarning, O2Percentage, Screen } from "./base";
 
 export const BestMix = (state: State) => (
     <Screen
@@ -24,7 +24,7 @@ export const BestMix = (state: State) => (
                 ({
                     ...state,
                     best_mix: { mod: event.target.valueAsNumber },
-                } as State)
+                }) as State
             }
         />
         <h2>

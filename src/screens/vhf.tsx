@@ -260,7 +260,7 @@ export const VhfChannels = (state: State) => (
                     vhf_channels: {
                         search: event.target.value,
                     },
-                } as State)
+                }) as State
             }
             placeholder={"Search"}
         />
