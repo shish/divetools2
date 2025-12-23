@@ -7,6 +7,7 @@ import {
 import { app, h, text } from "hyperapp";
 import { WatchPosition } from "hyperapp-fx";
 import { Root } from "./screens/root";
+import "./static/style.scss";
 
 // import { DiveTable, SurfaceIntervalTimes, ResidualNitrogen } from "./tables";
 import { About } from "./screens/about";

@@ -13,7 +13,7 @@ export const About = () => (
         </p>
         <p>
             Source Code:{" "}
-            <a href={"https://github.com/shish/DiveTools2"}>GitHub</a>
+            <a href={"https://github.com/shish/divetools2"}>GitHub</a>
         </p>
         <p>
             Ocean background

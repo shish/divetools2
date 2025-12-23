@@ -1,0 +1,17 @@
+{
+  "name": "DiveTools",
+  "short_name": "DiveTools",
+  "start_url": ".",
+  "theme_color": "#B9FFFF",
+  "background_color": "#4f8baa",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

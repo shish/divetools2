@@ -14,7 +14,7 @@ MAIN {
   right: 0;
   bottom: 0;
   // By Vanesa camaño - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=20284104
-  background-image: url("bg.jpg");
+  background-image: url("./bg.jpg");
   background-size: cover;
 
   text-align: center;
@@ -32,7 +32,7 @@ MAIN {
   }
   ARTICLE {
     flex: 0 1 auto;
-    overflow: scroll;
+    overflow-y: auto;
     H3 {
       font-size: 1.5em;
       margin-bottom: 0.5em;
