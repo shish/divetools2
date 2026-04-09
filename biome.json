@@ -1,0 +1,18 @@
+{
+    "formatter": {
+        "indentStyle": "space",
+        "indentWidth": 4
+    },
+    "javascript": {
+        "formatter": {
+            "jsxQuoteStyle": "double",
+            "trailingCommas": "all"
+        }
+    },
+    "html": {
+        "formatter": {
+            "indentScriptAndStyle": false,
+            "selfCloseVoidElements": "always"
+        }
+    }
+}

@@ -13,19 +13,11 @@
         "build": "rsbuild build",
         "serve": "rsbuild dev --port 1226",
         "preview": "rsbuild preview",
-        "format": "prettier --write 'src/**/*.ts{,x}'"
+        "format": "biome format --write"
     },
     "devDependencies": {
         "@rsbuild/core": "^1.6.15",
         "@rsbuild/plugin-sass": "^1.4.0",
-        "prettier": "^3.6",
-        "prettier-plugin-organize-imports": "^4.3.0"
-    },
-    "prettier": {
-        "trailingComma": "all",
-        "tabWidth": 4,
-        "plugins": [
-            "prettier-plugin-organize-imports"
-        ]
+        "@biomejs/biome": "^2.4"
     }
 }
