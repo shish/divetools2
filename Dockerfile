@@ -1,4 +1,4 @@
-FROM node:24 AS build
+FROM node:25 AS build
 EXPOSE 80
 
 # Install dependencies
