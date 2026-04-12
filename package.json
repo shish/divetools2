@@ -16,7 +16,7 @@
         "format": "biome format --write"
     },
     "devDependencies": {
-        "@rsbuild/core": "^1.6.15",
+        "@rsbuild/core": "^1.7.5",
         "@rsbuild/plugin-sass": "^1.4.0",
         "@biomejs/biome": "^2.4"
     }
