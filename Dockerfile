@@ -9,4 +9,4 @@ RUN npm install
 # Build app
 COPY . /app
 RUN npm run build
-CMD ["./node_modules/.bin/rsbuild", "preview", "--port", "80"]
+CMD ["./node_modules/.bin/rsbuild", "preview", "--port", "80", "--host", "0.0.0.0"]
